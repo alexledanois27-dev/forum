@@ -1,0 +1,9 @@
+# SQLite
+data/*.db
+!data/.gitkeep
+
+# Go
+/forum
+
+# Logs
+*.log
