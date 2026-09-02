@@ -1,12 +1,18 @@
 package main
 
 import (
+	"forum/internal/database"
 	"forum/internal/handlers"
 	"log"
 	"net/http"
 )
 
 func main() {
+	db, err := database.Open("data/forum.db")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer db.Close()
 	mux := http.NewServeMux()
 
 	mux.HandleFunc("/", handlers.HomeHandler)
@@ -22,7 +28,7 @@ func main() {
 
 	log.Println("Server started on http://localhost:8080")
 
-	err := http.ListenAndServe(":8080", mux)
+	err = http.ListenAndServe(":8080", mux)
 	if err != nil {
 		log.Fatal(err)
 	}
