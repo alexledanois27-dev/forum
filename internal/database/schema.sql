@@ -60,7 +60,7 @@ CREATE TABLE IF NOT EXISTS comments (
     post_id INTEGER NOT NULL,
     user_id INTEGER NOT NULL,
     content TEXT NOT NULL
-        CHECK (length(trim(content)) > 0),
+        CHECK (length(trim(content)) BETWEEN 1 AND 800),
     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
