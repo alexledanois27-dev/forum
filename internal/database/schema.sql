@@ -31,7 +31,7 @@ CREATE TABlE IF NOT EXISTS posts (
     title TEXT NOT NULL
         CHECK (length(trim(title)) BETWEEN 1 AND 150),
     content TEXT NOT NULL
-        CHECK (length(trim(content)) > 0)
+        CHECK (length(trim(content)) > 0),
     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
@@ -53,7 +53,7 @@ CREATE TABLE IF NOT EXISTS post_categories (
     FOREIGN KEY (category_id)
         REFERENCES categories(id)
         ON DELETE CASCADE
-)
+);
 
 CREATE TABLE IF NOT EXISTS comments (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -110,7 +110,7 @@ CREATE TABLE IF NOT EXISTS comment_reactions (
 CREATE INDEX IF NOT EXISTS idx_sessions_user_id
     ON sessions(user_id);
 
-CREATE INDEX IF NOT EXISTS idx_sessions_expies_at
+CREATE INDEX IF NOT EXISTS idx_sessions_expires_at
     ON sessions(expires_at);
 
 CREATE INDEX IF NOT EXISTS idx_posts_user_id
