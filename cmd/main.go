@@ -15,13 +15,17 @@ func main() {
 	defer db.Close()
 	mux := http.NewServeMux()
 
-	mux.HandleFunc("/", handlers.HomeHandler)
-	mux.HandleFunc("/login", handlers.LoginHandler)
-	mux.HandleFunc("/register", handlers.RegisterHandler)
-	mux.HandleFunc("/logout", handlers.LogoutHandler)
-	mux.HandleFunc("/post", handlers.PostHandler)
-	mux.HandleFunc("/comment", handlers.CommentHandler)
-	mux.HandleFunc("/like", handlers.LikeHandler)
+	h := &handlers.Handler{
+		DB: db,
+	}
+
+	mux.HandleFunc("/", h.HomeHandler)
+	mux.HandleFunc("/login", h.LoginHandler)
+	mux.HandleFunc("/register", h.RegisterHandler)
+	mux.HandleFunc("/logout", h.LogoutHandler)
+	mux.HandleFunc("/post", h.PostHandler)
+	mux.HandleFunc("/comment", h.CommentHandler)
+	mux.HandleFunc("/like", h.LikeHandler)
 
 	fileServer := http.FileServer(http.Dir("./static"))
 	mux.Handle("/static/", http.StripPrefix("/static/", fileServer))
