@@ -27,5 +27,8 @@ func HomeHandler(w http.ResponseWriter, r *http.Request) {
 
 	// TODO: Récupérer les posts depuis la base
 
-	tmpl.ExecuteTemplate(w, "layout", nil)
+	if err := tmpl.ExecuteTemplate(w, "layout", nil); err != nil {
+		http.Error(w, "Internal server error", http.StatusInternalServerError)
+		return
+	}
 }
