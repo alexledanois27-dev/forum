@@ -7,13 +7,15 @@ import (
 
 func HomeHandler(w http.ResponseWriter, r *http.Request) {
 	if r.URL.Path != "/" {
-		http.NotFound(w, r)
+		http.Error(w, "Page not found", http.StatusNotFound)
 		return
 	}
+
 	if r.Method != http.MethodGet {
 		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
 		return
 	}
+
 	tmpl, err := template.ParseFiles(
 		"templates/layout.html",
 		"templates/home.html",
@@ -22,9 +24,8 @@ func HomeHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Internal server error", http.StatusInternalServerError)
 		return
 	}
-	err = tmpl.ExecuteTemplate(w, "layout", nil)
-	if err != nil {
-		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
-		return
-	}
+
+	// TODO: Récupérer les posts depuis la base
+
+	tmpl.ExecuteTemplate(w, "layout", nil)
 }

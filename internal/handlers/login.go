@@ -1,10 +1,42 @@
 package handlers
 
 import (
-	"fmt"
+	"html/template"
 	"net/http"
 )
 
 func LoginHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "Page de connexion")
+	switch r.Method {
+
+	case http.MethodGet:
+
+		tmpl, err := template.ParseFiles(
+			"templates/layout.html",
+			"templates/login.html",
+		)
+		if err != nil {
+			http.Error(w, "Internal server error", http.StatusInternalServerError)
+			return
+		}
+
+		tmpl.ExecuteTemplate(w, "layout", nil)
+
+	case http.MethodPost:
+
+		// TODO: r.ParseForm()
+
+		// TODO: email := r.FormValue("email")
+		// TODO: password := r.FormValue("password")
+
+		// TODO: database.GetUserByEmail(...)
+
+		// TODO: hash.CheckPassword(...)
+
+		// TODO: middleware.CreateSession(...)
+
+		http.Redirect(w, r, "/", http.StatusSeeOther)
+
+	default:
+		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
+	}
 }
