@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+  <title>Comments</title>
+  <defs>
+    <linearGradient id="scroll-gold" x1="5" y1="3" x2="19" y2="21" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F3E1AB"/>
+      <stop offset=".45" stop-color="#D2B575"/>
+      <stop offset="1" stop-color="#96733C"/>
+    </linearGradient>
+  </defs>
+  <g stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <g stroke="#594326" transform="translate(0 .65)">
+      <path d="M8 3.5H17A2.5 2.5 0 0 1 19.5 6V8H14.5V6A2.5 2.5 0 0 1 17 3.5M8 3.5A2.5 2.5 0 0 0 5.5 6V15.5M14.5 8V18A2.5 2.5 0 0 1 12 20.5H4.5A2.5 2.5 0 0 1 2 18V15.5H9.5V18A2.5 2.5 0 0 0 12 20.5"/>
+      <path d="M8.5 8H11.5M8.5 11.5H11.5"/>
+    </g>
+    <g stroke="url(#scroll-gold)">
+      <path d="M8 3.5H17A2.5 2.5 0 0 1 19.5 6V8H14.5V6A2.5 2.5 0 0 1 17 3.5M8 3.5A2.5 2.5 0 0 0 5.5 6V15.5M14.5 8V18A2.5 2.5 0 0 1 12 20.5H4.5A2.5 2.5 0 0 1 2 18V15.5H9.5V18A2.5 2.5 0 0 0 12 20.5"/>
+      <path d="M8.5 8H11.5M8.5 11.5H11.5"/>
+    </g>
+  </g>
+</svg>
