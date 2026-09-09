@@ -9,3 +9,7 @@ data/*.db-wal
 
 # Logs
 *.log
+
+# Obsidian/Lore 
+/JDR
+/repomix-output.md
