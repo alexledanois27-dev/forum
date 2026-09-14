@@ -7,7 +7,6 @@
 <a class="compose-link" href="/post">
     <span class="compose-icon"><img src="/static/Icons/quill-write.svg" width="24" height="24" alt=""></span>
     <span>Quelle histoire allez-vous écrire ?<small>Partager une chronique avec le monde</small></span>
-    <span class="compose-arrow" aria-hidden="true">↗</span>
 </a>
 <div class="feed-label"><h2>Dernières chroniques</h2><span>Les plus récentes d’abord</span></div>
 <div class="post-list">
@@ -19,13 +18,11 @@
         <div class="post-actions">
             <form action="/like" method="post" class="reaction-form">
                 <input type="hidden" name="post_id" value="{{.ID}}">
-                <button type="submit" name="value" value="1" aria-label="Aimer la chronique : {{.Title}}"><span aria-hidden="true">↑</span> J’aime</button>
-                <button type="submit" name="value" value="-1" aria-label="Ne pas aimer la chronique : {{.Title}}"><span aria-hidden="true">↓</span></button>
+                <button type="submit" name="value" value="1" title="J’aime" aria-label="Aimer la chronique : {{.Title}}"><img src="/static/Icons/like.svg" width="20" height="20" alt=""></button>
+                <button type="submit" name="value" value="-1" title="Je n’aime pas" aria-label="Ne pas aimer la chronique : {{.Title}}"><img src="/static/Icons/dislike.svg" width="20" height="20" alt=""></button>
             </form>
-            <a class="permalink" href="#post-{{.ID}}" aria-label="Lien vers la chronique : {{.Title}}">#{{.ID}}</a>
-        </div>
         <details class="comment-box">
-            <summary><img src="/static/Icons/scroll.svg" width="20" height="20" alt=""> Ajouter un commentaire</summary>
+            <summary title="Ajouter un commentaire" aria-label="Ajouter un commentaire à la chronique : {{.Title}}"><img src="/static/Icons/scroll.svg" width="20" height="20" alt=""></summary>
             <form action="/comment" method="post">
                 <input type="hidden" name="post_id" value="{{.ID}}">
                 <label for="comment-{{.ID}}">Votre commentaire</label>
@@ -33,6 +30,7 @@
                 <div class="comment-submit"><small>Une connexion est nécessaire pour participer.</small><button class="button button-outline" type="submit">Publier</button></div>
             </form>
         </details>
+        </div>
     </article>
     {{else}}
     <section class="empty-state" aria-labelledby="empty-title">
@@ -40,7 +38,7 @@
         <p class="eyebrow">Une page encore vierge</p>
         <h2 id="empty-title">Toute légende a un début.</h2>
         <p>Les premières chroniques restent à écrire.<br>Un récit, une question, une rencontre : le monde attend votre voix.</p>
-        <a class="button button-outline" href="/post">Écrire la première chronique <span aria-hidden="true">↗</span></a>
+        <a class="button button-outline" href="/post">Écrire la première chronique</a>
     </section>
     {{end}}
 </div>
