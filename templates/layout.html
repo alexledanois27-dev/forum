@@ -8,7 +8,7 @@
     <title>{{block "title" .}}La Source du Monde — Forum{{end}}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&amp;family=UnifrakturCook:wght@700&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bokor&amp;family=Literata:ital,opsz,wght@0,7..72,200..900;1,7..72,200..900&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body>
@@ -20,7 +20,10 @@
         <img src="/static/Icons/source-du-monde.svg" width="36" height="36" alt="">
         <span>La Source du Monde<small>CHRONIQUES DES TROIS CONTINENTS</small></span>
     </a>
-    <a class="header-login" href="/login">Se connecter</a>
+    <nav class="header-auth" aria-label="Accès au compte">
+        <a class="button button-gold" href="/login">Se connecter</a>
+        <a class="button button-outline" href="/register">Créer un compte</a>
+    </nav>
 </header>
 
 <div class="page-shell">
@@ -77,6 +80,7 @@
 </div>
 
 {{end}}
+<script src="/static/js/character-count.js" defer></script>
 </body>
 </html>
 {{end}}

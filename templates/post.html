@@ -2,7 +2,7 @@
 {{define "content"}}
 <header class="feed-heading">
     <p class="eyebrow">À votre plume</p>
-    <h1>Écrire une chronique</h1>
+    <h1>Ecrire une chronique</h1>
     <p>Un récit, une question, une idée : faites entendre votre voix.</p>
 </header>
 <section class="post-editor" aria-label="Nouvelle chronique">
@@ -37,7 +37,8 @@
     </fieldset>
     <div class="editor-field">
         <label for="post-content">Votre chronique</label>
-        <textarea id="post-content" name="content" rows="10" required placeholder="Il était une fois… ou simplement une question qui mérite d’être posée." aria-describedby="content-help"></textarea>
+        <textarea id="post-content" name="content" rows="10" maxlength="10000" data-counter="post-counter" required placeholder="Il était une fois… ou simplement une question qui mérite d’être posée." aria-describedby="content-help post-counter"></textarea>
+        <span class="char-counter" id="post-counter" hidden></span>
         <small id="content-help">Le titre et le texte sont obligatoires.</small>
     </div>
     <div class="editor-actions">

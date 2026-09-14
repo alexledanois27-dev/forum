@@ -27,7 +27,8 @@
             <form action="/comment" method="post">
                 <input type="hidden" name="post_id" value="{{.ID}}">
                 <label for="comment-{{.ID}}">Votre commentaire</label>
-                <textarea id="comment-{{.ID}}" name="content" rows="3" maxlength="800" required placeholder="Faites entendre votre voix…"></textarea>
+                <textarea id="comment-{{.ID}}" name="content" rows="3" maxlength="800" data-counter="comment-counter-{{.ID}}" aria-describedby="comment-counter-{{.ID}}" required placeholder="Faites entendre votre voix…"></textarea>
+                <span class="char-counter" id="comment-counter-{{.ID}}" hidden></span>
                 <div class="comment-submit"><small>Une connexion est nécessaire pour participer.</small><button class="button button-outline" type="submit">Publier</button></div>
             </form>
         </details>
