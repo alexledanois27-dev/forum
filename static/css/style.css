@@ -58,8 +58,13 @@ h1 { font-family: var(--gothic); color: var(--gold); font-size: 46px; font-weigh
 .avatar { display: grid; place-items: center; width: 28px; height: 28px; color: var(--gold); background: var(--raised); border-radius: 50%; }
 .post-card h3 { font: 700 22px/1.4 var(--body-font); color: var(--text); margin: 16px 0 10px; }
 .post-content { color: #b0b5ac; white-space: pre-wrap; margin: 0 0 20px; line-height: 1.8; }
+/* JS activa este límite: sin JavaScript, el texto completo sigue siendo legible. */
+.post-content.is-collapsed { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 6; max-height: 10.8em; overflow: hidden; }
+.post-read-more { grid-column: 1; grid-row: 1; justify-self: start; min-height: 44px; margin: 0; padding: 8px 0; border: 0; background: transparent; color: var(--gold); font: inherit; cursor: pointer; }
+.post-read-more:hover { text-decoration: underline; text-underline-offset: 4px; }
+.post-read-more[hidden] { display: none; }
 .post-actions { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) 92px 44px; column-gap: 12px; align-items: start; }
-.reaction-form { grid-column: 2; display: flex; gap: 4px; }
+.reaction-form { grid-column: 2; grid-row: 1; display: flex; gap: 4px; }
 .reaction-form button, .comment-box summary { display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; padding: 10px; background: transparent; border: 1px solid transparent; border-radius: 5px; color: var(--muted); }
 .reaction-form button:hover, .comment-box summary:hover, .comment-box[open] summary { color: var(--gold); background: var(--raised); border-color: var(--line); }
 .reaction-form button span { color: var(--gold); }

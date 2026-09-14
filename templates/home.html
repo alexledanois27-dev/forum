@@ -14,8 +14,9 @@
     <article class="post-card" id="post-{{.ID}}" aria-labelledby="title-{{.ID}}">
         <div class="post-meta"><span class="avatar" aria-hidden="true">✦</span><span>Voyageur n° {{.UserID}}</span><span aria-hidden="true">·</span><time datetime='{{.CreatedAt.Format "2006-01-02T15:04:05Z07:00"}}'>{{.CreatedAt.Format "02/01/2006 à 15:04"}}</time></div>
         <h3 id="title-{{.ID}}">{{.Title}}</h3>
-        <p class="post-content">{{.Content}}</p>
+        <p class="post-content" id="post-content-{{.ID}}">{{.Content}}</p>
         <div class="post-actions">
+            <button class="post-read-more" type="button" aria-controls="post-content-{{.ID}}" aria-expanded="false" hidden>Lire la suite</button>
             <form action="/like" method="post" class="reaction-form">
                 <input type="hidden" name="post_id" value="{{.ID}}">
                 <button type="submit" name="value" value="1" title="J’aime" aria-label="Aimer la chronique : {{.Title}}"><img src="/static/Icons/like.svg" width="20" height="20" alt=""></button>
@@ -42,4 +43,5 @@
     </section>
     {{end}}
 </div>
+<script src="/static/js/feed.js" defer></script>
 {{end}}
