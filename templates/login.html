@@ -1,0 +1,21 @@
+{{define "title"}}Connexion — La Source du Monde{{end}}
+{{define "body"}}{{template "auth-shell" .}}{{end}}
+{{define "content"}}
+<header class="auth-intro">
+    <p class="eyebrow">Le voyage continue</p>
+    <h1 id="auth-title">Heureux de vous revoir</h1>
+    <p>Retrouvez votre place au cœur des chroniques.</p>
+</header>
+<form class="auth-form" action="/login" method="post">
+    <div class="auth-field">
+        <label for="login-email">Adresse e-mail</label>
+        <input id="login-email" name="email" type="email" autocomplete="username" maxlength="254" required placeholder="vous@exemple.fr" spellcheck="false" autocapitalize="none">
+    </div>
+    <div class="auth-field">
+        <label for="login-password">Mot de passe</label>
+        <input id="login-password" name="password" type="password" autocomplete="current-password" required>
+    </div>
+    <button class="button button-gold auth-submit" type="submit">Se connecter <span aria-hidden="true">↗</span></button>
+</form>
+<p class="auth-switch">Votre histoire commence ici ? <a href="/register">Créer un compte</a></p>
+{{end}}

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#0b1513">
-    <title>La Source du Monde — Forum</title>
+    <title>{{block "title" .}}La Source du Monde — Forum{{end}}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&amp;family=UnifrakturCook:wght@700&amp;display=swap" rel="stylesheet">
@@ -14,6 +14,7 @@
 <body>
 
 <a class="skip-link" href="#main">Aller au contenu</a>
+{{block "body" .}}
 <header class="site-header">
     <a class="brand" href="/" aria-label="La Source du Monde, accueil">
         <img src="/static/Icons/source-du-monde.svg" width="36" height="36" alt="">
@@ -75,6 +76,27 @@
     </aside>
 </div>
 
+{{end}}
 </body>
 </html>
+{{end}}
+
+
+{{define "auth-shell"}}
+<div class="auth-page">
+    <header class="auth-header">
+        <a class="brand" href="/" aria-label="La Source du Monde, accueil">
+            <img src="/static/Icons/source-du-monde.svg" width="36" height="36" alt="">
+            <span>La Source du Monde<small>CHRONIQUES DES TROIS CONTINENTS</small></span>
+        </a>
+    </header>
+    <main id="main" class="auth-main" tabindex="-1">
+        <section class="auth-card" aria-labelledby="auth-title">
+            <a class="auth-back" href="/"><span aria-hidden="true">←</span> Retour au forum</a>
+            <div class="auth-emblem" aria-hidden="true"><img src="/static/Icons/source-du-monde.svg" width="38" height="38" alt=""></div>
+            {{template "content" .}}
+        </section>
+    </main>
+    <footer class="auth-footer">Trois continents. Une infinité d’histoires.</footer>
+</div>
 {{end}}

@@ -1,0 +1,28 @@
+{{define "title"}}Inscription — La Source du Monde{{end}}
+{{define "body"}}{{template "auth-shell" .}}{{end}}
+{{define "content"}}
+<header class="auth-intro">
+    <p class="eyebrow">Une nouvelle voix</p>
+    <h1 id="auth-title">Entrez dans l’histoire</h1>
+    <p>Créez votre compte et écrivez votre première chronique.</p>
+</header>
+<form class="auth-form" action="/register" method="post">
+    <div class="auth-field">
+        <label for="register-username">Nom d’utilisateur</label>
+        <input id="register-username" name="username" type="text" autocomplete="username" minlength="3" maxlength="30" pattern="[a-zA-Z0-9_\-]{3,30}" required aria-describedby="username-help" placeholder="Votre nom de voyageur" spellcheck="false" autocapitalize="none">
+        <small id="username-help">3 à 30 caractères : lettres sans accents, chiffres, tirets ou underscores.</small>
+    </div>
+    <div class="auth-field">
+        <label for="register-email">Adresse e-mail</label>
+        <input id="register-email" name="email" type="email" autocomplete="email" maxlength="254" required placeholder="vous@exemple.fr" spellcheck="false" autocapitalize="none">
+    </div>
+    <div class="auth-field">
+        <label for="register-password">Mot de passe</label>
+        <input id="register-password" name="password" type="password" autocomplete="new-password" minlength="8" required aria-describedby="password-help">
+        <small id="password-help">Au moins 8 caractères, dans la limite de 72 octets. Les caractères accentués peuvent compter pour plusieurs octets.</small>
+    </div>
+    <button class="button button-gold auth-submit" type="submit">Créer mon compte <span aria-hidden="true">↗</span></button>
+    <p class="auth-form-note">Vous pourrez ensuite vous connecter avec votre adresse e-mail.</p>
+</form>
+<p class="auth-switch">Déjà parmi les voyageurs ? <a href="/login">Se connecter</a></p>
+{{end}}
