@@ -10,7 +10,7 @@
 </a>
 <div class="feed-label"><h2>Dernières chroniques</h2><span>Les plus récentes d’abord</span></div>
 <div class="post-list">
-    {{range .}}
+    {{range .Posts}}
     <article class="post-card" id="post-{{.ID}}" aria-labelledby="title-{{.ID}}">
         <div class="post-meta"><span class="avatar" aria-hidden="true">✦</span><span>Voyageur n° {{.UserID}}</span><span aria-hidden="true">·</span><time datetime='{{.CreatedAt.Format "2006-01-02T15:04:05Z07:00"}}'>{{.CreatedAt.Format "02/01/2006 à 15:04"}}</time></div>
         <h3 id="title-{{.ID}}">{{.Title}}</h3>
@@ -18,10 +18,22 @@
         <div class="post-actions">
             <button class="post-read-more" type="button" aria-controls="post-content-{{.ID}}" aria-expanded="false" hidden>Lire la suite</button>
             <form action="/like" method="post" class="reaction-form">
-                <input type="hidden" name="post_id" value="{{.ID}}">
-                <button type="submit" name="value" value="1" title="J’aime" aria-label="Aimer la chronique : {{.Title}}"><img src="/static/Icons/like.svg" width="20" height="20" alt=""></button>
-                <button type="submit" name="value" value="-1" title="Je n’aime pas" aria-label="Ne pas aimer la chronique : {{.Title}}"><img src="/static/Icons/dislike.svg" width="20" height="20" alt=""></button>
-            </form>
+    <input type="hidden" name="post_id" value="{{.ID}}">
+
+    <button type="submit" name="value" value="1"
+        title="J’aime"
+        aria-label="Aimer la chronique : {{.Title}}">
+        <img src="/static/Icons/like.svg" width="20" height="20" alt="">
+        <span>{{.LikeCount}}</span>
+    </button>
+
+    <button type="submit" name="value" value="-1"
+        title="Je n’aime pas"
+        aria-label="Ne pas aimer la chronique : {{.Title}}">
+        <img src="/static/Icons/dislike.svg" width="20" height="20" alt="">
+        <span>{{.DislikeCount}}</span>
+    </button>
+</form>
         <details class="comment-box">
             <summary title="Ajouter un commentaire" aria-label="Ajouter un commentaire à la chronique : {{.Title}}"><img src="/static/Icons/scroll.svg" width="20" height="20" alt=""></summary>
             <form action="/comment" method="post">

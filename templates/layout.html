@@ -21,9 +21,19 @@
         <span>La Source du Monde<small>CHRONIQUES DES TROIS CONTINENTS</small></span>
     </a>
     <nav class="header-auth" aria-label="Accès au compte">
+    {{if .User}}
+        <span>Bonjour {{.User.Username}}</span>
+
+        <form method="POST" action="/logout">
+            <button class="button button-outline" type="submit">
+                Se déconnecter
+            </button>
+        </form>
+    {{else}}
         <a class="button button-gold" href="/login">Se connecter</a>
         <a class="button button-outline" href="/register">Créer un compte</a>
-    </nav>
+    {{end}}
+</nav>
 </header>
 
 <div class="page-shell">
