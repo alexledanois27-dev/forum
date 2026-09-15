@@ -18,29 +18,10 @@
         <div class="post-actions">
             <button class="post-read-more" type="button" aria-controls="post-content-{{.ID}}" aria-expanded="false" hidden>Lire la suite</button>
             <form action="/like" method="post" class="reaction-form">
-<<<<<<< HEAD
                 <input type="hidden" name="post_id" value="{{.ID}}">
                 <button type="submit" name="value" value="1" title="J’aime" aria-label="Aimer la chronique : {{.Title}} ({{.LikeCount}} mentions J’aime)"><img src="/static/Icons/like.svg" width="20" height="20" alt=""><span class="reaction-count" aria-hidden="true">{{.LikeCount}}</span></button>
                 <button type="submit" name="value" value="-1" title="Je n’aime pas" aria-label="Ne pas aimer la chronique : {{.Title}} ({{.DislikeCount}} mentions Je n’aime pas)"><img src="/static/Icons/dislike.svg" width="20" height="20" alt=""><span class="reaction-count" aria-hidden="true">{{.DislikeCount}}</span></button>
             </form>
-=======
-    <input type="hidden" name="post_id" value="{{.ID}}">
-
-    <button type="submit" name="value" value="1"
-        title="J’aime"
-        aria-label="Aimer la chronique : {{.Title}}">
-        <img src="/static/Icons/like.svg" width="20" height="20" alt="">
-        <span>{{.LikeCount}}</span>
-    </button>
-
-    <button type="submit" name="value" value="-1"
-        title="Je n’aime pas"
-        aria-label="Ne pas aimer la chronique : {{.Title}}">
-        <img src="/static/Icons/dislike.svg" width="20" height="20" alt="">
-        <span>{{.DislikeCount}}</span>
-    </button>
-</form>
->>>>>>> origin/develop
         <details class="comment-box">
             <summary title="Ajouter un commentaire" aria-label="Ajouter un commentaire à la chronique : {{.Title}}"><img src="/static/Icons/scroll.svg" width="20" height="20" alt=""></summary>
             <form action="/comment" method="post">
