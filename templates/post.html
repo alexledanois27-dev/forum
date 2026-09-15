@@ -25,7 +25,7 @@
         <legend>Catégories <span>Facultatif</span></legend>
         <p id="categories-help">Choisissez les thèmes qui correspondent à votre chronique.</p>
         <div class="category-options">
-            {{range .}}
+            {{range .Categories}}
             <label class="category-option">
                 <input type="checkbox" name="categories" value="{{.ID}}">
                 <span>{{.Name}}</span>
