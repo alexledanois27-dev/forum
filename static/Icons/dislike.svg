@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+  <title>Dislike</title>
+  <defs>
+    <linearGradient id="heart-gold" x1="6" y1="4" x2="18" y2="21" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F3E1AB"/>
+      <stop offset=".45" stop-color="#D2B575"/>
+      <stop offset="1" stop-color="#96733C"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Original like heart, unchanged -->
+  <path d="M12 20S3 14.4 3 8.7C3 5.9 4.8 4 7.3 4C9.3 4 11 5.3 12 7C13 5.3 14.7 4 16.7 4C19.2 4 21 5.9 21 8.7C21 14.4 12 20 12 20Z"
+        transform="translate(0 .65)"
+        stroke="#594326"
+        stroke-width="1.7"
+        stroke-linejoin="round"/>
+
+  <path d="M12 20S3 14.4 3 8.7C3 5.9 4.8 4 7.3 4C9.3 4 11 5.3 12 7C13 5.3 14.7 4 16.7 4C19.2 4 21 5.9 21 8.7C21 14.4 12 20 12 20Z"
+        stroke="url(#heart-gold)"
+        stroke-width="1.5"
+        stroke-linejoin="round"/>
+
+  <!-- Subtle rune-like fracture -->
+  <path d="M12.9 8.2L10.9 11.25L12.6 12.2L10.8 15.7"
+        stroke="#594326"
+        stroke-width="2.1"
+        stroke-linecap="round"
+        stroke-linejoin="round"/>
+
+  <path d="M12.9 8.2L10.9 11.25L12.6 12.2L10.8 15.7"
+        stroke="url(#heart-gold)"
+        stroke-width="1.15"
+        stroke-linecap="round"
+        stroke-linejoin="round"/>
+</svg>

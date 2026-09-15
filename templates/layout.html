@@ -4,17 +4,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Forum</title>
+    <meta name="theme-color" content="#0b1513">
+    <title>{{block "title" .}}La Source du Monde — Forum{{end}}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bokor&amp;family=Literata:ital,opsz,wght@0,7..72,200..900;1,7..72,200..900&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body>
 
-<header>
+<a class="skip-link" href="#main">Aller au contenu</a>
+{{block "body" .}}
+<header class="site-header">
+    <a class="brand" href="/" aria-label="La Source du Monde, accueil">
+        <img src="/static/Icons/source-du-monde.svg" width="36" height="36" alt="">
+        <span>La Source du Monde<small>CHRONIQUES DES TROIS CONTINENTS</small></span>
+    </a>
+    <nav class="header-auth" aria-label="Accès au compte">
+        <a class="button button-gold" href="/login">Se connecter</a>
+        <a class="button button-outline" href="/register">Créer un compte</a>
+    </nav>
 </header>
 
-<main>
-    {{template "content" .}}
-</main>
+<div class="page-shell">
+    <aside class="left-sidebar" aria-label="Navigation du forum">
+        <a class="button button-gold create-post" href="/post"><img src="/static/Icons/quill-write.svg" width="22" height="22" alt="">Écrire une chronique</a>
+        <nav class="primary-nav" aria-label="Navigation principale">
+            <a href="/"><img src="/static/Icons/source-du-monde.svg" width="22" height="22" alt="">Le forum</a>
+            <button disabled><img src="/static/Icons/scroll.svg" width="22" height="22" alt="">Mes chroniques<small class="availability-badge">À venir</small></button>
+            <button disabled><img src="/static/Icons/activity.svg" width="22" height="22" alt="">Activité<small class="availability-badge">À venir</small></button>
+            <button disabled><img src="/static/Icons/category.svg" width="22" height="22" alt="">Catégories<small class="availability-badge">À venir</small></button>
+        </nav>
+        <p class="menu-status">Les options grisées seront disponibles prochainement.</p>
+        <section class="menu-section" aria-labelledby="trending-heading">
+            <h2 id="trending-heading"><img src="/static/Icons/flame-trending.svg" width="20" height="20" alt="">À la une <small>À venir</small></h2>
+            <ul class="topic-list">
+                <li><button disabled><span class="topic-number">1</span>Monde et légendes</button></li>
+                <li><button disabled><span class="topic-number">2</span>Arts arcaniques</button></li>
+                <li><button disabled><span class="topic-number">3</span>Artisanat et savoirs</button></li>
+                <li><button disabled><span class="topic-number">4</span>Peuples et créatures</button></li>
+                <li><button disabled><span class="topic-number">5</span>Politique des royaumes</button></li>
+            </ul>
+        </section>
+        <section class="menu-section" aria-labelledby="guild-heading">
+            <h2 id="guild-heading"><img src="/static/Icons/shield-guilds.svg" width="20" height="20" alt="">Les guildes <small>À venir</small></h2>
+            <p class="guild-note">Un jour, les voyageurs se rassembleront sous leurs propres bannières.</p>
+            <button class="guild-discover" disabled><img src="/static/Icons/shield-guilds.svg" width="22" height="22" alt="">Découvrir les guildes</button>
+        </section>
+        <footer class="sidebar-footer">La Source du Monde<br><span>Un univers à écrire ensemble.</span></footer>
+    </aside>
 
+    <main id="main" tabindex="-1">
+        {{template "content" .}}
+    </main>
+
+    <aside class="right-sidebar" aria-label="À propos de l’univers">
+        <section class="lore-panel">
+            <p class="eyebrow">Bienvenue, voyageur</p>
+            <h2>Au commencement,<br>la Source.</h2>
+            <p>Au cœur de l’océan, entre les trois continents, une source ancienne continue d’insuffler son mana au monde.</p>
+            <p>Ici, les voix de ses peuples se rencontrent. Partagez vos récits et donnez vie à cet univers.</p>
+            <a class="text-link" href="/register">Prendre part à l’histoire</a>
+        </section>
+        <section class="world-panel">
+            <p class="eyebrow">Fragments du monde</p>
+            <h2>Au-delà de l’horizon</h2>
+            <dl class="world-list">
+                <div><dt><span aria-hidden="true">I</span> Prospérité</dt><dd>Les racines d’Yggdrasil s’étendent dans les grandes forêts du Sud.</dd></div>
+                <div><dt><span aria-hidden="true">II</span> Destruction</dt><dd>L’un des trois continents issus de la fracture du monde primordial.</dd></div>
+                <div><dt><span aria-hidden="true">III</span> Terres Divines</dt><dd>Les terres où les Dieux ont emmené les futurs Hauts Nains.</dd></div>
+            </dl>
+        </section>
+        <p class="closing-note"><span aria-hidden="true">✧</span> Chaque voix laisse une trace.</p>
+    </aside>
+</div>
+
+{{end}}
+<script src="/static/js/character-count.js" defer></script>
 </body>
 </html>
+{{end}}
+
+
+{{define "auth-shell"}}
+<div class="auth-page">
+    <header class="auth-header">
+        <a class="brand" href="/" aria-label="La Source du Monde, accueil">
+            <img src="/static/Icons/source-du-monde.svg" width="36" height="36" alt="">
+            <span>La Source du Monde<small>CHRONIQUES DES TROIS CONTINENTS</small></span>
+        </a>
+    </header>
+    <main id="main" class="auth-main" tabindex="-1">
+        <section class="auth-card" aria-labelledby="auth-title">
+            <a class="auth-back" href="/"><span aria-hidden="true">←</span> Retour au forum</a>
+            <div class="auth-emblem" aria-hidden="true"><img src="/static/Icons/source-du-monde.svg" width="38" height="38" alt=""></div>
+            {{template "content" .}}
+        </section>
+    </main>
+    <footer class="auth-footer">Trois continents. Une infinité d’histoires.</footer>
+</div>
 {{end}}

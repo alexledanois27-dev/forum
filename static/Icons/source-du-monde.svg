@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="240" viewBox="0 0 120 120" fill="none">
+  <title>Source du Monde — propuesta de logo</title>
+  <desc>Un núcleo de mana rodeado de tres fragmentos curvos que evocan los continentes y su origen común.</desc>
+  <defs>
+    <linearGradient id="source-gold" x1="25" y1="15" x2="92" y2="105" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F3E1AB"/>
+      <stop offset=".45" stop-color="#D2B575"/>
+      <stop offset="1" stop-color="#96733C"/>
+    </linearGradient>
+    <linearGradient id="source-core" x1="54" y1="44" x2="66" y2="77" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFF0BF"/>
+      <stop offset=".5" stop-color="#D2B575"/>
+      <stop offset="1" stop-color="#96733C"/>
+    </linearGradient>
+    <path id="source-fragment" d="M40 21C57 11 81 17 93 35C98 43 100 52 98 61C92 47 85 38 74 34C63 30 52 32 44 38C47 31 46 25 40 21Z"/>
+    <g id="source-ring">
+      <use href="#source-fragment"/>
+      <use href="#source-fragment" transform="rotate(120 60 60)"/>
+      <use href="#source-fragment" transform="rotate(240 60 60)"/>
+    </g>
+  </defs>
+  <use href="#source-ring" transform="translate(0 1.2)" stroke="#594326" stroke-width="1.8" stroke-linejoin="round"/>
+  <use href="#source-ring" fill="url(#source-gold)" fill-opacity=".18" stroke="url(#source-gold)" stroke-width="1.6" stroke-linejoin="round"/>
+  <path d="M60 42C62 53 66 57 76 60C66 63 62 67 60 78C58 67 54 63 44 60C54 57 58 53 60 42Z" transform="translate(0 1.2)" fill="#594326"/>
+  <path d="M60 42C62 53 66 57 76 60C66 63 62 67 60 78C58 67 54 63 44 60C54 57 58 53 60 42Z" fill="url(#source-core)"/>
+  <path d="M60 54L63 60L60 66L57 60Z" fill="#FFF0BF"/>
+</svg>

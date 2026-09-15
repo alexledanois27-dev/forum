@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+  <title>Search</title>
+  <defs>
+    <linearGradient id="search-gold" x1="5" y1="3" x2="20" y2="22" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F3E1AB"/>
+      <stop offset=".45" stop-color="#D2B575"/>
+      <stop offset="1" stop-color="#96733C"/>
+    </linearGradient>
+    <g id="search-spyglass" transform="rotate(-35 12 12)">
+      <path d="M2.5 10.9H6V13.1H2.5ZM6 10.2H11V13.8H6ZM11 9.5H18V14.5H11ZM18 8.7H20.5V15.3H18Z"/>
+      <path d="M13 11H16"/>
+    </g>
+  </defs>
+  <g stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <use href="#search-spyglass" transform="translate(0 .65)" stroke="#594326"/>
+    <use href="#search-spyglass" stroke="url(#search-gold)"/>
+  </g>
+</svg>

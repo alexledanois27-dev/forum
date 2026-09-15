@@ -1,4 +1,48 @@
 {{define "content"}}
-<h1>Accueil</h1>
-<p>Bienvenue sur le forum.</p>
+<header class="feed-heading">
+    <p class="eyebrow">Les voix du monde</p>
+    <h1>Le forum</h1>
+    <p>Récits, questions et rencontres au fil des chroniques.</p>
+</header>
+<a class="compose-link" href="/post">
+    <span class="compose-icon"><img src="/static/Icons/quill-write.svg" width="24" height="24" alt=""></span>
+    <span>Quelle histoire allez-vous écrire ?<small>Partager une chronique avec le monde</small></span>
+</a>
+<div class="feed-label"><h2>Dernières chroniques</h2><span>Les plus récentes d’abord</span></div>
+<div class="post-list">
+    {{range .}}
+    <article class="post-card" id="post-{{.ID}}" aria-labelledby="title-{{.ID}}">
+        <div class="post-meta"><span class="avatar" aria-hidden="true">✦</span><span>Voyageur n° {{.UserID}}</span><span aria-hidden="true">·</span><time datetime='{{.CreatedAt.Format "2006-01-02T15:04:05Z07:00"}}'>{{.CreatedAt.Format "02/01/2006 à 15:04"}}</time></div>
+        <h3 id="title-{{.ID}}">{{.Title}}</h3>
+        <p class="post-content" id="post-content-{{.ID}}">{{.Content}}</p>
+        <div class="post-actions">
+            <button class="post-read-more" type="button" aria-controls="post-content-{{.ID}}" aria-expanded="false" hidden>Lire la suite</button>
+            <form action="/like" method="post" class="reaction-form">
+                <input type="hidden" name="post_id" value="{{.ID}}">
+                <button type="submit" name="value" value="1" title="J’aime" aria-label="Aimer la chronique : {{.Title}}"><img src="/static/Icons/like.svg" width="20" height="20" alt=""></button>
+                <button type="submit" name="value" value="-1" title="Je n’aime pas" aria-label="Ne pas aimer la chronique : {{.Title}}"><img src="/static/Icons/dislike.svg" width="20" height="20" alt=""></button>
+            </form>
+        <details class="comment-box">
+            <summary title="Ajouter un commentaire" aria-label="Ajouter un commentaire à la chronique : {{.Title}}"><img src="/static/Icons/scroll.svg" width="20" height="20" alt=""></summary>
+            <form action="/comment" method="post">
+                <input type="hidden" name="post_id" value="{{.ID}}">
+                <label for="comment-{{.ID}}">Votre commentaire</label>
+                <textarea id="comment-{{.ID}}" name="content" rows="3" maxlength="800" data-counter="comment-counter-{{.ID}}" aria-describedby="comment-counter-{{.ID}}" required placeholder="Faites entendre votre voix…"></textarea>
+                <span class="char-counter" id="comment-counter-{{.ID}}" hidden></span>
+                <div class="comment-submit"><small>Une connexion est nécessaire pour participer.</small><button class="button button-outline" type="submit">Publier</button></div>
+            </form>
+        </details>
+        </div>
+    </article>
+    {{else}}
+    <section class="empty-state" aria-labelledby="empty-title">
+        <span class="empty-emblem" aria-hidden="true">✧</span>
+        <p class="eyebrow">Une page encore vierge</p>
+        <h2 id="empty-title">Toute légende a un début.</h2>
+        <p>Les premières chroniques restent à écrire.<br>Un récit, une question, une rencontre : le monde attend votre voix.</p>
+        <a class="button button-outline" href="/post">Écrire la première chronique</a>
+    </section>
+    {{end}}
+</div>
+<script src="/static/js/feed.js" defer></script>
 {{end}}

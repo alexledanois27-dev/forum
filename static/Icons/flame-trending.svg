@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+  <title>Trending</title>
+  <defs>
+    <linearGradient id="flame-gold" x1="6" y1="3" x2="18" y2="21" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F3E1AB"/>
+      <stop offset=".45" stop-color="#D2B575"/>
+      <stop offset="1" stop-color="#96733C"/>
+    </linearGradient>
+  </defs>
+  <g stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <g stroke="#594326" transform="translate(0 .65)">
+      <path d="M12.5 2.5C13.5 6.5 8 8 9 12C7.5 11.5 6.5 10 6.5 8.5C4.8 10.7 4 12.7 4 15C4 18.9 7.6 21.5 12 21.5C16.4 21.5 20 18.9 20 15C20 12 18.5 9.5 16 7.5C16.5 10 15.5 11 14.5 11.5C15.5 7.5 15 4.5 12.5 2.5Z"/>
+      <path d="M10 18C9.5 15.5 12.5 14.5 12.5 12.5C14.5 14.5 15.5 16 14.5 18"/>
+    </g>
+    <g stroke="url(#flame-gold)">
+      <path d="M12.5 2.5C13.5 6.5 8 8 9 12C7.5 11.5 6.5 10 6.5 8.5C4.8 10.7 4 12.7 4 15C4 18.9 7.6 21.5 12 21.5C16.4 21.5 20 18.9 20 15C20 12 18.5 9.5 16 7.5C16.5 10 15.5 11 14.5 11.5C15.5 7.5 15 4.5 12.5 2.5Z"/>
+      <path d="M10 18C9.5 15.5 12.5 14.5 12.5 12.5C14.5 14.5 15.5 16 14.5 18"/>
+    </g>
+  </g>
+</svg>

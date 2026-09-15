@@ -1,0 +1,49 @@
+{{define "title"}}Écrire une chronique — La Source du Monde{{end}}
+{{define "content"}}
+<header class="feed-heading">
+    <p class="eyebrow">À votre plume</p>
+    <h1>Ecrire une chronique</h1>
+    <p>Un récit, une question, une idée : faites entendre votre voix.</p>
+</header>
+<section class="post-editor" aria-label="Nouvelle chronique">
+    <div class="editor-intro">
+        <img src="/static/Icons/quill-write.svg" width="26" height="26" alt="">
+        <p>Chaque histoire commence par quelques mots.</p>
+    </div>
+    {{template "post-form" .}}
+</section>
+{{end}}
+
+{{define "post-form"}}
+<form class="post-form" action="/post" method="post">
+    <div class="editor-field">
+        <label for="post-title">Titre de la chronique</label>
+        <input id="post-title" name="title" type="text" maxlength="150" required aria-describedby="title-help" placeholder="Donnez un titre à votre histoire…">
+        <small id="title-help">150 caractères maximum.</small>
+    </div>
+    <fieldset class="editor-categories" aria-describedby="categories-help">
+        <legend>Catégories <span>Facultatif</span></legend>
+        <p id="categories-help">Choisissez les thèmes qui correspondent à votre chronique.</p>
+        <div class="category-options">
+            {{range .}}
+            <label class="category-option">
+                <input type="checkbox" name="categories" value="{{.ID}}">
+                <span>{{.Name}}</span>
+            </label>
+            {{else}}
+            <p class="categories-empty">Aucune catégorie disponible pour le moment. Vous pouvez tout de même publier votre chronique.</p>
+            {{end}}
+        </div>
+    </fieldset>
+    <div class="editor-field">
+        <label for="post-content">Votre chronique</label>
+        <textarea id="post-content" name="content" rows="10" maxlength="10000" data-counter="post-counter" required placeholder="Il était une fois… ou simplement une question qui mérite d’être posée." aria-describedby="content-help post-counter"></textarea>
+        <span class="char-counter" id="post-counter" hidden></span>
+        <small id="content-help">Le titre et le texte sont obligatoires.</small>
+    </div>
+    <div class="editor-actions">
+        <a class="button button-outline" href="/">Annuler</a>
+        <button class="button button-gold" type="submit">Publier la chronique</button>
+    </div>
+</form>
+{{end}}
