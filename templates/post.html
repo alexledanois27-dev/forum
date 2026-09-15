@@ -47,3 +47,9 @@
     </div>
 </form>
 {{end}}
+
+
+{{/* Compatibilidad temporal: /post solo entrega categorías, sin .User.
+     Cuando su handler entregue .User y .Categories, quitar este bloque
+     y pasar .Categories al formulario post-form. */}}
+{{define "account-slot"}}{{template "account-navigation"}}{{end}}
