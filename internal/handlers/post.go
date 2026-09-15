@@ -27,6 +27,12 @@ func (h *Handler) PostHandler(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
+		user, err := database.GetUserByID(h.DB, int(session.UserID))
+		if err != nil {
+			http.Error(w, "Internal server error", http.StatusInternalServerError)
+			return
+		}
+
 		tmpl, err := template.ParseFiles(
 			"templates/layout.html",
 			"templates/post.html",
@@ -36,7 +42,15 @@ func (h *Handler) PostHandler(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		if err := tmpl.ExecuteTemplate(w, "layout", categories); err != nil {
+		data := struct {
+			User       *models.User
+			Categories []models.Category
+		}{
+			User:       user,
+			Categories: categories,
+		}
+
+		if err := tmpl.ExecuteTemplate(w, "layout", data); err != nil {
 			http.Error(w, "Internal server error", http.StatusInternalServerError)
 			return
 		}
@@ -63,6 +77,7 @@ func (h *Handler) PostHandler(w http.ResponseWriter, r *http.Request) {
 			if err != nil {
 				continue
 			}
+
 			categoryIDs = append(categoryIDs, id)
 		}
 

@@ -31,7 +31,7 @@ CREATE TABlE IF NOT EXISTS posts (
     title TEXT NOT NULL
         CHECK (length(trim(title)) BETWEEN 1 AND 150),
     content TEXT NOT NULL
-        CHECK (length(trim(content)) > 0),
+        CHECK (length(trim(content)) BETWEEN 1 AND 10000),
     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
 

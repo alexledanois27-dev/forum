@@ -23,7 +23,6 @@ type HomePageData struct {
 }
 
 func (h *Handler) HomeHandler(w http.ResponseWriter, r *http.Request) {
-
 	// Vérifie l'URL
 	if r.URL.Path != "/" {
 		http.NotFound(w, r)
@@ -55,7 +54,6 @@ func (h *Handler) HomeHandler(w http.ResponseWriter, r *http.Request) {
 	var postViews []PostView
 
 	for _, post := range posts {
-
 		view := PostView{
 			Post: post,
 		}
