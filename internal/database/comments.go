@@ -101,3 +101,16 @@ func DeleteComment(db *sql.DB, commentID int) error {
 
 	return err
 }
+
+// CountPostComments returns the number of comments for a post.
+func CountPostComments(db *sql.DB, postID int) (int, error) {
+	var count int
+
+	err := db.QueryRow(`
+        SELECT COUNT()
+        FROM comments
+        WHERE post_id = ?
+    `, postID).Scan(&count)
+
+	return count, err
+}
