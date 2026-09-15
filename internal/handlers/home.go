@@ -5,85 +5,57 @@ import (
 	"net/http"
 
 	"forum/internal/database"
-	"forum/internal/middleware"
 	"forum/internal/models"
 )
 
-type PostView struct {
-	models.Post
-
-	Author       string
-	LikeCount    int
-	DislikeCount int
-}
-
 type HomePageData struct {
 	User  *models.User
-	Posts []PostView
+	Posts []models.Post
 }
 
 func (h *Handler) HomeHandler(w http.ResponseWriter, r *http.Request) {
-
-	// Vérifie l'URL
+	// Vérifie que l'utilisateur demande bien la page d'accueil.
 	if r.URL.Path != "/" {
-		http.NotFound(w, r)
+		http.Error(w, "Page not found", http.StatusNotFound)
 		return
 	}
 
-	// Accepte uniquement GET
+	// Accepte uniquement les requêtes GET.
 	if r.Method != http.MethodGet {
 		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
 		return
 	}
 
-	// Utilisateur connecté (optionnel)
-	var currentUser *models.User
-
-	if session, err := middleware.GetCurrentSession(h.DB, r); err == nil {
-		if user, err := database.GetUserByID(h.DB, int(session.UserID)); err == nil {
-			currentUser = user
-		}
-	}
-
-	// Récupère tous les posts
+	// Récupère tous les posts.
 	posts, err := database.GetAllPosts(h.DB)
 	if err != nil {
 		http.Error(w, "Internal server error", http.StatusInternalServerError)
 		return
 	}
 
-	var postViews []PostView
-
-	for _, post := range posts {
-
-		view := PostView{
-			Post: post,
-		}
-
-		// Auteur
-		if author, err := database.GetUserByID(h.DB, int(post.UserID)); err == nil {
-			view.Author = author.Username
-		}
-
-		// Nombre de likes
-		if likes, err := database.CountPostLikes(h.DB, int(post.ID)); err == nil {
-			view.LikeCount = likes
-		}
-
-		// Nombre de dislikes
-		if dislikes, err := database.CountPostDislikes(h.DB, int(post.ID)); err == nil {
-			view.DislikeCount = dislikes
-		}
-
-		postViews = append(postViews, view)
+	// Récupère la session de l'utilisateur.
+	session, err := database.GetCurrentSession(h.DB, r)
+	if err != nil {
+		session = nil
 	}
 
+	var user *models.User
+
+	// Si une session existe, récupère l'utilisateur correspondant.
+	if session != nil {
+		user, err = database.GetUserByID(h.DB, session.UserID)
+		if err != nil {
+			user = nil
+		}
+	}
+
+	// Prépare les données envoyées aux templates.
 	data := HomePageData{
-		User:  currentUser,
-		Posts: postViews,
+		User:  user,
+		Posts: posts,
 	}
 
-	// Charge les templates
+	// Charge les templates.
 	tmpl, err := template.ParseFiles(
 		"templates/layout.html",
 		"templates/home.html",
@@ -93,7 +65,7 @@ func (h *Handler) HomeHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Affiche la page
+	// Envoie les données au template.
 	if err := tmpl.ExecuteTemplate(w, "layout", data); err != nil {
 		http.Error(w, "Internal server error", http.StatusInternalServerError)
 		return
