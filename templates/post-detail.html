@@ -1,0 +1,45 @@
+{{define "title"}}{{.Post.Title}} — La Source du Monde{{end}}
+{{define "content"}}
+<div class="discussion-page">
+    <nav class="discussion-back" aria-label="Retour"><a class="text-link" href="/">Retour au forum</a><a class="text-link" href="/categories">Catégories</a></nav>
+    {{with .Post}}
+    <article class="discussion-post" aria-labelledby="discussion-title">
+        <div class="post-meta"><span>{{if .Author}}{{.Author}}{{else}}Auteur inconnu{{end}}</span><span aria-hidden="true">·</span><time datetime='{{.CreatedAt.Format "2006-01-02T15:04:05Z07:00"}}'>{{.CreatedAt.Format "02/01/2006 à 15:04"}}</time></div>
+        <h1 id="discussion-title">{{.Title}}</h1>
+        <p class="post-content">{{.Content}}</p>
+        <form class="reaction-form discussion-reactions" action="/like" method="post">
+            <input type="hidden" name="post_id" value="{{.ID}}">
+            <button type="submit" name="value" value="1" title="J’aime" aria-label="Aimer : {{.LikeCount}} mentions J’aime"><img src="/static/Icons/like.svg" width="20" height="20" alt=""><span class="reaction-count">{{.LikeCount}}</span></button>
+            <button type="submit" name="value" value="-1" title="Je n’aime pas" aria-label="Ne pas aimer : {{.DislikeCount}} mentions Je n’aime pas"><img src="/static/Icons/dislike.svg" width="20" height="20" alt=""><span class="reaction-count">{{.DislikeCount}}</span></button>
+        </form>
+    </article>
+    {{end}}
+    <section class="discussion-comments" aria-labelledby="comments-heading">
+        <h2 id="comments-heading"><img src="/static/Icons/scroll.svg" width="24" height="24" alt="">Commentaires <span>{{len .Comments}}</span></h2>
+        {{if .User}}
+        <form class="discussion-reply" action="/comment" method="post">
+            <input type="hidden" name="post_id" value="{{.Post.ID}}">
+            <label for="discussion-comment">Votre commentaire</label>
+            <textarea id="discussion-comment" name="content" rows="4" maxlength="800" required data-counter="discussion-counter" aria-describedby="discussion-counter" placeholder="Prenez part à la discussion…"></textarea>
+            <span class="char-counter" id="discussion-counter" hidden></span>
+            <div class="comment-submit"><button class="button button-outline" type="submit">Publier le commentaire</button></div>
+        </form>
+        {{else}}
+        <div class="discussion-signin"><p>Connectez-vous pour prendre part à la discussion.</p><a class="button button-outline" href="/login">Se connecter</a></div>
+        {{end}}
+        {{range .Comments}}
+        <article class="discussion-comment" id="comment-{{.ID}}" aria-label="Commentaire de {{if .Author}}{{.Author}}{{else}}Auteur inconnu{{end}}">
+            <div class="post-meta"><span>{{if .Author}}{{.Author}}{{else}}Auteur inconnu{{end}}</span><span aria-hidden="true">·</span><time datetime='{{.CreatedAt.Format "2006-01-02T15:04:05Z07:00"}}'>{{.CreatedAt.Format "02/01/2006 à 15:04"}}</time></div>
+            <p class="post-content">{{.Content}}</p>
+            <form class="reaction-form discussion-reactions" action="/like" method="post">
+                <input type="hidden" name="comment_id" value="{{.ID}}">
+                <button type="submit" name="value" value="1" title="J’aime" aria-label="Aimer le commentaire : {{.LikeCount}} mentions J’aime"><img src="/static/Icons/like.svg" width="20" height="20" alt=""><span class="reaction-count">{{.LikeCount}}</span></button>
+                <button type="submit" name="value" value="-1" title="Je n’aime pas" aria-label="Ne pas aimer le commentaire : {{.DislikeCount}} mentions Je n’aime pas"><img src="/static/Icons/dislike.svg" width="20" height="20" alt=""><span class="reaction-count">{{.DislikeCount}}</span></button>
+            </form>
+        </article>
+        {{else}}
+        <p class="discussion-empty">La discussion attend sa première voix. Soyez la première à laisser un commentaire.</p>
+        {{end}}
+    </section>
+</div>
+{{end}}

@@ -1,0 +1,27 @@
+{{define "title"}}{{.Category.Name}} — La Source du Monde{{end}}
+{{define "content"}}
+<header class="feed-heading">
+    <a class="text-link" href="/categories">Toutes les catégories</a>
+    <p class="eyebrow">Les chroniques du monde</p>
+    <h1>{{.Category.Name}}</h1>
+    <p>Les récits et les discussions autour de ce thème.</p>
+</header>
+<a class="compose-link" href="/post"><img src="/static/Icons/quill-write.svg" width="24" height="24" alt="">Écrire une chronique</a>
+<div class="feed-label"><h2>Dernières chroniques</h2><span>{{len .Posts}} publication(s)</span></div>
+<div class="post-list">
+    {{range .Posts}}
+    <article class="post-card" aria-labelledby="category-post-{{.ID}}">
+        <div class="post-meta"><span>{{if .Author}}{{.Author}}{{else}}Auteur inconnu{{end}}</span><span aria-hidden="true">·</span><time datetime='{{.CreatedAt.Format "2006-01-02T15:04:05Z07:00"}}'>{{.CreatedAt.Format "02/01/2006 à 15:04"}}</time></div>
+        <h3 id="category-post-{{.ID}}"><a class="post-title-link" href="/post-detail?id={{.ID}}">{{.Title}}</a></h3>
+        <p class="post-content category-excerpt">{{.Content}}</p>
+        <a class="text-link" href="/post-detail?id={{.ID}}">Lire la chronique et les commentaires</a>
+    </article>
+    {{else}}
+    <section class="empty-state">
+        <h2>Une histoire à commencer</h2>
+        <p>Aucune chronique dans cette catégorie pour le moment.</p>
+        <a class="button button-outline" href="/post">Écrire une chronique</a>
+    </section>
+    {{end}}
+</div>
+{{end}}
