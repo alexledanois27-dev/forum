@@ -16,6 +16,9 @@
 <a class="skip-link" href="#main">Aller au contenu</a>
 {{block "body" .}}
 <header class="site-header">
+    <button class="menu-toggle" type="button" aria-label="Ouvrir le menu" aria-controls="mobile-menu" aria-expanded="false" hidden>
+        <span class="burger-icon" aria-hidden="true"><span></span><span></span><span></span></span>
+    </button>
     <a class="brand" href="/" aria-label="La Source du Monde, accueil">
         <img src="/static/Icons/source-du-monde.svg" width="36" height="36" alt="">
         <span>La Source du Monde<small>CHRONIQUES DES TROIS CONTINENTS</small></span>
@@ -24,7 +27,7 @@
 </header>
 
 <div class="page-shell">
-    <aside class="left-sidebar" aria-label="Navigation du forum">
+    <aside class="left-sidebar" id="forum-navigation" aria-label="Navigation du forum">
         <a class="button button-gold create-post" href="/post"><img src="/static/Icons/quill-write.svg" width="22" height="22" alt="">Écrire une chronique</a>
         <nav class="primary-nav" aria-label="Navigation principale">
             <a href="/"><img src="/static/Icons/source-du-monde.svg" width="22" height="22" alt="">Le forum</a>
@@ -76,7 +79,15 @@
     </aside>
 </div>
 
+<dialog class="mobile-menu" id="mobile-menu" aria-labelledby="mobile-menu-title">
+    <div class="mobile-menu-heading">
+        <h2 id="mobile-menu-title">Le forum</h2>
+        <button class="menu-close" type="button" aria-label="Fermer le menu" autofocus><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="mobile-menu-content"></div>
+</dialog>
 {{end}}
+<script src="/static/js/navigation.js" defer></script>
 <script src="/static/js/character-count.js" defer></script>
 </body>
 </html>
