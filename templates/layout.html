@@ -89,6 +89,7 @@
 {{end}}
 <script src="/static/js/navigation.js" defer></script>
 <script src="/static/js/character-count.js" defer></script>
+<script src="/static/js/account-menu.js" defer></script>
 </body>
 </html>
 {{end}}
@@ -118,10 +119,15 @@
 {{define "account-navigation"}}
 <nav class="header-auth" aria-label="Accès au compte">
     {{if .}}
-    <span class="header-greeting">Bonjour, <strong>{{.Username}}</strong></span>
-    <form action="/logout" method="post">
-        <button class="button button-outline" type="submit">Se déconnecter</button>
-    </form>
+    <span class="header-greeting">Bonjour,</span>
+    <details class="account-menu">
+        <summary aria-label="Options du compte de {{.Username}}">{{.Username}}</summary>
+        <div class="account-menu-panel">
+            <form action="/logout" method="post">
+                <button class="account-menu-action" type="submit">Se déconnecter</button>
+            </form>
+        </div>
+    </details>
     {{else}}
     <a class="button button-gold" href="/login">Se connecter</a>
     <a class="button button-outline" href="/register">Créer un compte</a>

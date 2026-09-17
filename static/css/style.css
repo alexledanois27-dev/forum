@@ -287,3 +287,19 @@ body.menu-open { overflow: hidden; }
     .discussion-post h1 { font-size: 24px; }
     .discussion-reply, .discussion-signin { padding: 16px; }
 }
+
+/* Select nativo: funciona con teclado y conserva el estilo del foro. */
+.feed-sort-bar { flex-wrap: wrap; }
+.feed-sort { max-width: 100%; min-height: 44px; margin-left: auto; padding: 8px 10px; border: 1px solid var(--line); border-radius: 5px; background: var(--surface); color: var(--gold); font: 12px/1.5 var(--body-font); cursor: pointer; }
+.feed-sort:hover { border-color: var(--gold); }
+.feed-sort:disabled { color: var(--muted); cursor: default; }
+
+/* El desplegable queda por encima del feed sin desplazar la cabecera. */
+.site-header { position: relative; z-index: 2; }
+.account-menu { position: relative; min-width: 0; max-width: 100%; }
+.account-menu summary { display: flex; align-items: center; min-height: 44px; padding: 6px 2px; list-style: none; color: var(--gold); font-size: 14px; font-weight: 700; cursor: pointer; overflow-wrap: anywhere; text-decoration: underline; text-decoration-color: #dfbf7e60; text-underline-offset: 5px; }
+.account-menu summary::-webkit-details-marker { display: none; }
+.account-menu summary:hover, .account-menu[open] summary { text-decoration-color: var(--gold); }
+.account-menu-panel { position: absolute; top: calc(100% + 8px); right: 0; width: 210px; max-width: calc(100vw - 32px); padding: 6px; background: var(--surface); border: 1px solid var(--line); border-radius: 6px; box-shadow: 0 12px 28px #0006; }
+.account-menu-action { display: block; width: 100%; min-height: 44px; padding: 10px 14px; border: 0; border-radius: 4px; background: transparent; color: var(--text); text-align: left; font-size: 13px; }
+.account-menu-action:hover { background: var(--raised); color: var(--gold); }
