@@ -66,7 +66,7 @@ h1 { font-family: var(--gothic); color: var(--gold); font-size: 46px; font-weigh
 .post-read-more { grid-column: 1; grid-row: 1; justify-self: start; min-height: 44px; margin: 0; padding: 8px 0; border: 0; background: transparent; color: var(--gold); font: inherit; cursor: pointer; }
 .post-read-more:hover { text-decoration: underline; text-underline-offset: 4px; }
 .post-read-more[hidden] { display: none; }
-.post-actions { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) 92px 44px; column-gap: 12px; align-items: start; }
+.post-actions { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) max-content 44px; column-gap: 12px; align-items: start; }
 .reaction-form { grid-column: 2; grid-row: 1; display: flex; gap: 4px; }
 .reaction-form button, .comment-box summary { display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; padding: 10px; background: transparent; border: 1px solid transparent; border-radius: 5px; color: var(--muted); }
 .reaction-form button:hover, .comment-box summary:hover, .comment-box[open] summary { color: var(--gold); background: var(--raised); border-color: var(--line); }
@@ -220,3 +220,12 @@ button:disabled { color: var(--disabled); cursor: not-allowed; }
     .comment-submit { align-items: flex-start; }
     .post-list { padding: 12px; }
 }
+
+/* Los contadores reservan el ancho que necesitan, incluso con varias cifras. */
+.reaction-form button { width: auto; min-width: 44px; gap: 6px; }
+.reaction-form img { flex-shrink: 0; }
+.reaction-count { font-size: 12px; font-variant-numeric: tabular-nums; }
+.header-greeting { color: var(--muted); font-size: 14px; overflow-wrap: anywhere; }
+.header-greeting strong { color: var(--gold); }
+.header-auth form { margin: 0; }
+.header-auth:has(.header-greeting) { flex-shrink: 1; flex-wrap: wrap; justify-content: flex-end; }
