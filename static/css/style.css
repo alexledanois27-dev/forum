@@ -12,7 +12,18 @@
     --gothic: "Bokor", "Palatino Linotype", Georgia, serif;
 }
 * { box-sizing: border-box; }
-body { margin: 0; background: var(--background); color: var(--text); font-family: var(--body-font); font-optical-sizing: auto; font-size: 16px; line-height: 1.65; }
+body { margin: 0; min-height: 100vh; position: relative; isolation: isolate; background: var(--background); color: var(--text); font-family: var(--body-font); font-optical-sizing: auto; font-size: 16px; line-height: 1.65; }
+/* Fondo fijo independiente del contenido: el recorte oculta el marco del mapa. */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background: linear-gradient(rgb(11 21 19 / 45%), rgb(11 21 19 / 45%)), url("/static/Images/Carte-du-monde.png") center / cover no-repeat;
+    /* Mapa 3:2: cobertura completa + 22 % de zoom, incluso en móvil. */
+    background-size: cover, max(122vw, 183vh) auto;
+}
 a { color: inherit; text-decoration: none; }
 button, input, textarea { font: inherit; }
 button, summary { cursor: pointer; }
@@ -22,7 +33,7 @@ a, button, summary { -webkit-tap-highlight-color: transparent; }
 :focus-visible { outline: 2px solid var(--gold); outline-offset: 5px; }
 .skip-link { position: absolute; top: -100px; left: 20px; padding: 12px; background: var(--gold); color: var(--background); z-index: 10; }
 .skip-link:focus { top: 12px; }
-.site-header { min-height: 98px; max-width: 1440px; margin: auto; padding: 20px 44px; display: flex; align-items: center; justify-content: space-between; gap: 24px; border-bottom: 1px solid var(--line); }
+.site-header { min-height: 98px; max-width: 100%; margin: auto; padding: 20px 44px; display: flex; align-items: center; justify-content: space-between; gap: 24px; border-bottom: 1px solid var(--line); background-color: transparent; -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
 .brand { display: flex; gap: 15px; align-items: center; color: var(--gold); font-family: var(--gothic); font-size: 29px; line-height: 1.2; }
 .brand small { display: block; margin-top: 8px; font: 9px/1.5 var(--body-font); letter-spacing: .2em; color: var(--muted); }
 .header-auth { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
@@ -30,7 +41,7 @@ a, button, summary { -webkit-tap-highlight-color: transparent; }
 .header-auth .button-gold { background: linear-gradient(135deg, #ecd094, #c4a369); border-color: #b7985f; box-shadow: 0 3px 10px #0003; }
 .header-auth .button-gold:hover { background: #efd299; }
 .page-shell { display: grid; grid-template-columns: 224px minmax(0, 1fr) 280px; max-width: 1352px; margin: auto; min-height: calc(100vh - 98px); }
-.left-sidebar { padding: 38px 26px 24px 0; }
+.left-sidebar { padding: 38px 20px 24px; background-color: var(--background); }
 .eyebrow { color: var(--muted); font-size: 10px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; margin: 0 0 20px; }
 .primary-nav { display: grid; gap: 8px; }
 .primary-nav a, .primary-nav button { display: flex; align-items: center; gap: 12px; padding: 14px 10px; border-radius: 4px; font-size: 14px; }
@@ -185,7 +196,7 @@ button:disabled { color: var(--disabled); cursor: not-allowed; }
 @media (max-width: 1150px) {
     .page-shell { grid-template-columns: 190px minmax(0, 1fr) 235px; margin: 0 24px; }
     .site-header { padding-inline: 24px; }
-    .left-sidebar { padding-right: 18px; }
+    .left-sidebar { padding-inline: 16px; }
     .right-sidebar { padding-left: 20px; }
     .primary-nav a, .primary-nav button { padding-inline: 4px; gap: 8px; font-size: 13px; }
 }
