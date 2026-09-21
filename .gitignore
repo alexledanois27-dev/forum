@@ -10,6 +10,5 @@ data/*.db-wal
 # Logs
 *.log
 
-# Obsidian/Lore 
-/JDR
+# support files
 /docs
