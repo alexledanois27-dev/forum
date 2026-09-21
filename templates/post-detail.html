@@ -1,7 +1,7 @@
 {{define "title"}}{{.Post.Title}} — La Source du Monde{{end}}
 {{define "content"}}
 <div class="discussion-page">
-    <nav class="discussion-back" aria-label="Retour"><a class="text-link" href="/">Retour au forum</a><a class="text-link" href="/categories">Catégories</a></nav>
+    <nav class="discussion-back" aria-label="Retour"><a class="text-link" href="/">Retour au forum</a></nav>
     {{with .Post}}
     <article class="discussion-post" aria-labelledby="discussion-title">
         <div class="post-meta"><span>{{if .Author}}{{.Author}}{{else}}Auteur inconnu{{end}}</span><span aria-hidden="true">·</span><time datetime='{{.CreatedAt.Format "2006-01-02T15:04:05Z07:00"}}'>{{.CreatedAt.Format "02/01/2006 à 15:04"}}</time></div>

@@ -8,15 +8,21 @@
     const cards = Array.from(list.querySelectorAll(".post-card"));
     select.disabled = cards.length === 0;
 
+    const requestedSort = new URLSearchParams(window.location.search).get("sort");
+    const popularView = requestedSort === "popular";
+    let sortMode = requestedSort === "oldest" ? "oldest" : "newest";
+    select.value = sortMode;
+
     function sortPosts() {
         cards.sort((a, b) => {
             const dateDifference = Number(b.dataset.created) - Number(a.dataset.created);
-            if (select.value === "oldest") return -dateDifference;
-            if (select.value === "popular") {
-                // Más likes primero. En caso de empate, primero el más reciente.
-                return Number(b.dataset.likes) - Number(a.dataset.likes) || dateDifference;
+            const chronologicalOrder = sortMode === "oldest" ? -dateDifference : dateDifference;
+            if (popularView) {
+                // Conservamos la popularidad y combinamos el orden elegido:
+                // primero los likes, después la fecha en caso de empate.
+                return Number(b.dataset.likes) - Number(a.dataset.likes) || chronologicalOrder;
             }
-            return dateDifference;
+            return chronologicalOrder;
         });
 
         // Movemos los elementos originales: no recreamos su HTML y conservamos
@@ -24,6 +30,15 @@
         cards.forEach((card) => list.append(card));
     }
 
-    select.addEventListener("change", sortPosts);
+    // La vista y el orden cronológico son independientes: el desplegable
+    // permanece disponible también al entrar desde «Populaires».
+    if (popularView) {
+        const heading = document.querySelector(".feed-sort-bar h2");
+        if (heading) heading.textContent = "Chroniques populaires";
+    }
+    select.addEventListener("change", () => {
+        sortMode = select.value;
+        sortPosts();
+    });
     sortPosts();
 })();

@@ -41,7 +41,7 @@ a, button, summary { -webkit-tap-highlight-color: transparent; }
 .header-auth .button-gold { background: linear-gradient(135deg, #ecd094, #c4a369); border-color: #b7985f; box-shadow: 0 3px 10px #0003; }
 .header-auth .button-gold:hover { background: #efd299; }
 .page-shell { display: grid; grid-template-columns: 224px minmax(0, 1fr) 280px; max-width: 1352px; margin: auto; min-height: calc(100vh - 98px); }
-.left-sidebar { padding: 38px 20px 24px; background-color: var(--background); }
+.left-sidebar { padding: 38px 20px 24px; background-color: var(--surface); }
 .eyebrow { color: var(--muted); font-size: 10px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; margin: 0 0 20px; }
 .primary-nav { display: grid; gap: 8px; }
 .primary-nav a, .primary-nav button { display: flex; align-items: center; gap: 12px; padding: 14px 10px; border-radius: 4px; font-size: 14px; }
@@ -259,12 +259,6 @@ body.menu-open { overflow: hidden; }
 }
 
 /* Catégories et discussions : même palette et même largeur que le feed. */
-.category-directory { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: 14px; padding: 0 24px 32px; }
-.category-card { display: flex; align-items: center; gap: 16px; padding: 22px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); overflow-wrap: anywhere; }
-.category-card img { flex-shrink: 0; }
-.category-card strong { display: block; color: var(--gold); font-size: 17px; }
-.category-card small { display: block; margin-top: 8px; color: var(--muted); font-size: 12px; }
-.category-card:hover { border-color: var(--gold); background: var(--raised); }
 .category-excerpt { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 4; max-height: 7.2em; overflow: hidden; }
 .post-title-link:hover { color: var(--gold); text-decoration: underline; text-underline-offset: 5px; }
 .discussion-page { padding: 28px; overflow-wrap: anywhere; }
@@ -282,7 +276,6 @@ body.menu-open { overflow: hidden; }
 .discussion-comment { padding: 24px 0; border-bottom: 1px solid var(--line); }
 .discussion-comment .post-content { margin-top: 14px; }
 @media (max-width: 640px) {
-    .category-directory { padding-inline: 16px; }
     .discussion-page { padding: 20px 16px; }
     .discussion-post h1 { font-size: 24px; }
     .discussion-reply, .discussion-signin { padding: 16px; }
@@ -303,3 +296,10 @@ body.menu-open { overflow: hidden; }
 .account-menu-panel { position: absolute; top: calc(100% + 8px); right: 0; width: 210px; max-width: calc(100vw - 32px); padding: 6px; background: var(--surface); border: 1px solid var(--line); border-radius: 6px; box-shadow: 0 12px 28px #0006; }
 .account-menu-action { display: block; width: 100%; min-height: 44px; padding: 10px 14px; border: 0; border-radius: 4px; background: transparent; color: var(--text); text-align: left; font-size: 13px; }
 .account-menu-action:hover { background: var(--raised); color: var(--gold); }
+
+/* Los temas comparten la misma lista que Accueil y À la une. */
+.category-filter-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+.category-filter-list a, .category-filter-list button { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; width: 100%; min-height: 44px; padding: 9px 10px; border: 0; border-radius: 5px; background: transparent; text-align: left; font: 13px/1.5 var(--body-font); }
+.category-filter-list a { color: var(--gold); }
+.category-filter-list a:hover { background: var(--raised); }
+.category-filter-list small { font-size: 9px; color: var(--muted); margin-left: auto; }
