@@ -11,3 +11,28 @@
 11. ajouter le lien vers l'application de jdr
 12. ajouter un lien vers le discord du JDR
 13. ajouter un POP-UP pour les cookies
+
+Bonus intra projects: 
+
+# Moderation
+[ ] Mod account to filter by theme, content and type of user (guest, user, mod, admin)
+
+# Advanced features
+[ ] RTA and notifications
+[ ] activity page (user activity)
+[ ] edit-remove posts and comments
+
+# Authentication
+[ ] Register and login with Google and Github
+
+# Image upload
+[ ] JPEG, PNG, GIF (20 mb max)
+[ ] Visible preview / Miniature
+
+# Security
+[ ] HTTPS protocol
+[ ] Rate limiting
+[ ] Encrypt pw and db
+[ ] Test cookies and sessions under attack environment
+[ ] Clients session cookies unique identifyer
+
