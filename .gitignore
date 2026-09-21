@@ -12,4 +12,4 @@ data/*.db-wal
 
 # Obsidian/Lore 
 /JDR
-/repomix-output.md
+/docs

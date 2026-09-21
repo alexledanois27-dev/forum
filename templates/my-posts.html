@@ -1,11 +1,14 @@
+{{define "title"}}Mes chroniques — La Source du Monde{{end}}
 {{define "content"}}
 <header class="feed-heading">
-    <p class="eyebrow">Les voix du monde</p>
-    <h1>Le forum</h1>
-    <p>Récits, questions et rencontres au fil des chroniques.</p>
+    <p class="eyebrow">Les traces de votre voyage</p>
+    <h1>Mes chroniques</h1>
+    <p>Retrouvez les récits, les questions et les idées que vous avez partagés.</p>
 </header>
+{{if .User}}
+{{/* Posts debe contener solo las publicaciones del usuario de la sesión. */}}
 <div class="feed-label feed-sort-bar">
-    <h2>Les chroniques</h2>
+    <h2>Vos chroniques · {{len .Posts}}</h2>
     <select class="feed-sort" id="feed-sort" aria-label="Trier les publications" disabled>
         <option value="newest">Les plus récents d’abord</option>
         <option value="oldest">Les plus anciens d’abord</option>
@@ -39,15 +42,22 @@
     {{else}}
     <section class="empty-state" aria-labelledby="empty-title">
         <span class="empty-emblem" aria-hidden="true">✧</span>
-        <p class="eyebrow">Une page encore vierge</p>
-        <h2 id="empty-title">Toute legende a un debut.</h2>
-        <p>Les premières chroniques restent à écrire.<br>Un récit, une question, une rencontre : le monde attend votre voix.</p>
+        <p class="eyebrow">Votre première page</p>
+        <h2 id="empty-title">Votre histoire reste à écrire.</h2>
+        <p>Vous n’avez pas encore publié de chronique.<br>Partagez votre premier récit avec le monde.</p>
         <a class="button button-outline" href="/post">Écrire la première chronique</a>
     </section>
     {{end}}
 </div>
 <script src="/static/js/feed.js" defer></script>
 <script src="/static/js/feed-sort.js" defer></script>
+{{else}}
+<section class="empty-state" aria-labelledby="signin-title">
+    <h2 id="signin-title">Retrouvez vos chroniques</h2>
+    <p>Connectez-vous pour consulter vos publications.</p>
+    <a class="button button-outline" href="/login">Se connecter</a>
+</section>
+{{end}}
 {{end}}
 
 
