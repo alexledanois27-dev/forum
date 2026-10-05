@@ -5,7 +5,7 @@
 5. Modifier le GMT de la date
 6. creer le mode moderateur
 7. modifier les logo et avatar
-8. ajouter/modifier les handler de categorie, user, comment, mypost, post 
+8. ajouter/modifier les handler de categorie, user, comment, mypost, post / DONE
 9. ajouter les badges
 10. ajouter de VRAI PUTAIN DE MESSAGES D'ERREUR
 11. ajouter le lien vers l'application de jdr
