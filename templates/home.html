@@ -15,25 +15,17 @@
     {{range .Posts}}
     <article class="post-card" data-created="{{.CreatedAt.Unix}}" data-likes="{{.LikeCount}}" id="post-{{.ID}}" aria-labelledby="title-{{.ID}}">
         <div class="post-meta"><span class="avatar" aria-hidden="true">✦</span><span>{{if .Author}}{{.Author}}{{else}}Auteur inconnu{{end}}</span><span aria-hidden="true">·</span><time datetime='{{.CreatedAt.Format "2006-01-02T15:04:05Z07:00"}}'>{{.CreatedAt.Format "02/01/2006 à 15:04"}}</time></div>
-        <h3 id="title-{{.ID}}">{{.Title}}</h3>
+        <h3 id="title-{{.ID}}"><a class="post-title-link" href="/post-detail?id={{.ID}}&amp;return_to={{$.ReturnTo}}">{{.Title}}</a></h3>
         <p class="post-content" id="post-content-{{.ID}}">{{.Content}}</p>
         <div class="post-actions">
             <button class="post-read-more" type="button" aria-controls="post-content-{{.ID}}" aria-expanded="false" hidden>Lire la suite</button>
             <form action="/like" method="post" class="reaction-form">
+                <input type="hidden" name="return_to" value="{{$.ReturnTo}}">
                 <input type="hidden" name="post_id" value="{{.ID}}">
-                <button type="submit" name="value" value="1" title="J’aime" aria-label="Aimer la chronique : {{.Title}} ({{.LikeCount}} mentions J’aime)"><img src="/static/Icons/like.svg" width="20" height="20" alt=""><span class="reaction-count" aria-hidden="true">{{.LikeCount}}</span></button>
-                <button type="submit" name="value" value="-1" title="Je n’aime pas" aria-label="Ne pas aimer la chronique : {{.Title}} ({{.DislikeCount}} mentions Je n’aime pas)"><img src="/static/Icons/dislike.svg" width="20" height="20" alt=""><span class="reaction-count" aria-hidden="true">{{.DislikeCount}}</span></button>
+                <button type="submit" name="value" value="1" aria-pressed="{{if eq .UserReaction 1}}true{{else}}false{{end}}" title="J’aime" aria-label="Aimer la chronique : {{.Title}} ({{.LikeCount}} mentions J’aime)"><img src="{{if eq .UserReaction 1}}/static/Icons/self-like.svg{{else}}/static/Icons/like.svg{{end}}" width="20" height="20" alt=""><span class="reaction-count" aria-hidden="true">{{.LikeCount}}</span></button>
+                <button type="submit" name="value" value="-1" aria-pressed="{{if eq .UserReaction -1}}true{{else}}false{{end}}" title="Je n’aime pas" aria-label="Ne pas aimer la chronique : {{.Title}} ({{.DislikeCount}} mentions Je n’aime pas)"><img src="{{if eq .UserReaction -1}}/static/Icons/self-dislike.svg{{else}}/static/Icons/dislike.svg{{end}}" width="20" height="20" alt=""><span class="reaction-count" aria-hidden="true">{{.DislikeCount}}</span></button>
             </form>
-        <details class="comment-box">
-            <summary title="Ajouter un commentaire" aria-label="Ajouter un commentaire à la chronique : {{.Title}}"><img src="/static/Icons/scroll.svg" width="20" height="20" alt=""></summary>
-            <form action="/comment" method="post">
-                <input type="hidden" name="post_id" value="{{.ID}}">
-                <label for="comment-{{.ID}}">Votre commentaire</label>
-                <textarea id="comment-{{.ID}}" name="content" rows="3" maxlength="800" data-counter="comment-counter-{{.ID}}" aria-describedby="comment-counter-{{.ID}}" required placeholder="Faites entendre votre voix…"></textarea>
-                <span class="char-counter" id="comment-counter-{{.ID}}" hidden></span>
-                <div class="comment-submit">{{if not $.User}}<small>Une connexion est nécessaire pour participer.</small>{{end}}<button class="button button-outline" type="submit">Publier</button></div>
-            </form>
-        </details>
+            <a class="comment-link" href="/post-detail?id={{.ID}}&amp;return_to={{$.ReturnTo}}#reply" title="Voir les commentaires et répondre" aria-label="Commenter la chronique : {{.Title}} ({{.CommentCount}} commentaires)"><img src="/static/Icons/scroll.svg" width="20" height="20" alt=""><span class="reaction-count" aria-hidden="true">{{.CommentCount}}</span></a>
         </div>
     </article>
     {{else}}

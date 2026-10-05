@@ -12,9 +12,9 @@
     {{range .Posts}}
     <article class="post-card" aria-labelledby="category-post-{{.ID}}">
         <div class="post-meta"><span>{{if .Author}}{{.Author}}{{else}}Auteur inconnu{{end}}</span><span aria-hidden="true">·</span><time datetime='{{.CreatedAt.Format "2006-01-02T15:04:05Z07:00"}}'>{{.CreatedAt.Format "02/01/2006 à 15:04"}}</time></div>
-        <h3 id="category-post-{{.ID}}"><a class="post-title-link" href="/post-detail?id={{.ID}}">{{.Title}}</a></h3>
+        <h3 id="category-post-{{.ID}}"><a class="post-title-link" href="/post-detail?id={{.ID}}&amp;return_to={{$.ReturnTo}}">{{.Title}}</a></h3>
         <p class="post-content category-excerpt">{{.Content}}</p>
-        <a class="text-link" href="/post-detail?id={{.ID}}">Lire la chronique et les commentaires</a>
+        <a class="text-link" href="/post-detail?id={{.ID}}&amp;return_to={{$.ReturnTo}}">Lire la chronique et les commentaires</a>
     </article>
     {{else}}
     <section class="empty-state">
