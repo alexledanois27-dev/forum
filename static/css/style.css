@@ -316,3 +316,14 @@ body.menu-open { overflow: hidden; }
 @media (max-width: 640px) {
     .discussion-post, .discussion-comment { padding: 18px; }
 }
+
+/* Grupos desplegables dentro del lateral: también caben en el menú móvil. */
+.category-group > summary { display: flex; align-items: center; justify-content: space-between; gap: 8px; min-height: 44px; padding: 10px; color: var(--gold); border-radius: 5px; font-size: 13px; font-weight: 600; letter-spacing: .04em; list-style: none; cursor: pointer; }
+.category-group > summary::-webkit-details-marker { display: none; }
+.category-group > summary::after { content: ""; width: 7px; height: 7px; flex-shrink: 0; margin: 0 3px 4px 8px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: rotate(45deg); }
+.category-group[open] > summary::after { transform: rotate(225deg); margin-bottom: 0; }
+.category-group > summary:hover, .category-group[open] > summary { background: var(--raised); }
+.category-submenu { list-style: none; margin: 6px 0 12px 10px; padding: 0 0 0 8px; border-left: 1px solid var(--line); }
+.category-submenu a, .category-submenu button { font-size: 12px; overflow-wrap: anywhere; }
+.category-submenu a { color: var(--text); }
+.category-submenu a:hover { color: var(--gold); }

@@ -40,13 +40,55 @@
             <nav aria-label="Filtrer les chroniques par catégorie">
                 <ul class="category-filter-list">
                     <li><a href="/?sort=popular"><img src="/static/Icons/flame-trending.svg" width="18" height="18" alt="">Populaires</a></li>
-                    <li><button type="button" disabled>Lore<small>À venir</small></button></li>
-                    <li><button type="button" disabled>Continents<small>À venir</small></button></li>
-                    <li><button type="button" disabled>Races<small>À venir</small></button></li>
-                    <li><button type="button" disabled>Magie<small>À venir</small></button></li>
-                    <li><button type="button" disabled>JDR<small>À venir</small></button></li>
-                    <li><button type="button" disabled>Création de l’univers<small>À venir</small></button></li>
-                    <li><button type="button" disabled>Communauté<small>À venir</small></button></li>
+                    <li><details class="category-group" name="forum-categories">
+                        <summary>FORUM</summary>
+                        <ul class="category-submenu">
+                            <li>{{$slug := ""}}{{range $.Categories}}{{if eq .Name "Annonces"}}{{$slug = .Slug}}{{end}}{{end}}{{if $slug}}<a href="/category?slug={{$slug}}">Annonces</a>{{else}}<button type="button" disabled>Annonces<small>À venir</small></button>{{end}}</li>
+                            <li>{{$slug := ""}}{{range $.Categories}}{{if eq .Name "Règlement"}}{{$slug = .Slug}}{{end}}{{end}}{{if $slug}}<a href="/category?slug={{$slug}}">Règlement</a>{{else}}<button type="button" disabled>Règlement<small>À venir</small></button>{{end}}</li>
+                            <li>{{$slug := ""}}{{range $.Categories}}{{if eq .Name "Changelog"}}{{$slug = .Slug}}{{end}}{{end}}{{if $slug}}<a href="/category?slug={{$slug}}">Changelog</a>{{else}}<button type="button" disabled>Changelog<small>À venir</small></button>{{end}}</li>
+                            <li>{{$slug := ""}}{{range $.Categories}}{{if eq .Name "Bugs et problèmes"}}{{$slug = .Slug}}{{end}}{{end}}{{if $slug}}<a href="/category?slug={{$slug}}">Bugs et problèmes</a>{{else}}<button type="button" disabled>Bugs et problèmes<small>À venir</small></button>{{end}}</li>
+                            <li>{{$slug := ""}}{{range $.Categories}}{{if eq .Name "Suggestions pour le forum"}}{{$slug = .Slug}}{{end}}{{end}}{{if $slug}}<a href="/category?slug={{$slug}}">Suggestions pour le forum</a>{{else}}<button type="button" disabled>Suggestions pour le forum<small>À venir</small></button>{{end}}</li>
+                            <li>{{$slug := ""}}{{range $.Categories}}{{if eq .Name "Présentations"}}{{$slug = .Slug}}{{end}}{{end}}{{if $slug}}<a href="/category?slug={{$slug}}">Présentations</a>{{else}}<button type="button" disabled>Présentations<small>À venir</small></button>{{end}}</li>
+                            <li>{{$slug := ""}}{{range $.Categories}}{{if eq .Name "Discussion générale"}}{{$slug = .Slug}}{{end}}{{end}}{{if $slug}}<a href="/category?slug={{$slug}}">Discussion générale</a>{{else}}<button type="button" disabled>Discussion générale<small>À venir</small></button>{{end}}</li>
+                            <li>{{$slug := ""}}{{range $.Categories}}{{if eq .Name "Hors sujet"}}{{$slug = .Slug}}{{end}}{{end}}{{if $slug}}<a href="/category?slug={{$slug}}">Hors sujet</a>{{else}}<button type="button" disabled>Hors sujet<small>À venir</small></button>{{end}}</li>
+                        </ul>
+                    </details></li>
+                    <li><details class="category-group" name="forum-categories">
+                        <summary>LORE</summary>
+                        <ul class="category-submenu">
+                            <li>{{$slug := ""}}{{range $.Categories}}{{if eq .Name "Mises à jour du lore"}}{{$slug = .Slug}}{{end}}{{end}}{{if $slug}}<a href="/category?slug={{$slug}}">Mises à jour du lore</a>{{else}}<button type="button" disabled>Mises à jour du lore<small>À venir</small></button>{{end}}</li>
+                            <li>{{$slug := ""}}{{range $.Categories}}{{if eq .Name "Discussions du lore"}}{{$slug = .Slug}}{{end}}{{end}}{{if $slug}}<a href="/category?slug={{$slug}}">Discussions du lore</a>{{else}}<button type="button" disabled>Discussions du lore<small>À venir</small></button>{{end}}</li>
+                            <li>{{$slug := ""}}{{range $.Categories}}{{if eq .Name "Géographie"}}{{$slug = .Slug}}{{end}}{{end}}{{if $slug}}<a href="/category?slug={{$slug}}">Géographie</a>{{else}}<button type="button" disabled>Géographie<small>À venir</small></button>{{end}}</li>
+                            <li>{{$slug := ""}}{{range $.Categories}}{{if eq .Name "Histoire"}}{{$slug = .Slug}}{{end}}{{end}}{{if $slug}}<a href="/category?slug={{$slug}}">Histoire</a>{{else}}<button type="button" disabled>Histoire<small>À venir</small></button>{{end}}</li>
+                            <li>{{$slug := ""}}{{range $.Categories}}{{if eq .Name "Peuples & factions"}}{{$slug = .Slug}}{{end}}{{end}}{{if $slug}}<a href="/category?slug={{$slug}}">Peuples &amp; factions</a>{{else}}<button type="button" disabled>Peuples &amp; factions<small>À venir</small></button>{{end}}</li>
+                            <li>{{$slug := ""}}{{range $.Categories}}{{if eq .Name "Races"}}{{$slug = .Slug}}{{end}}{{end}}{{if $slug}}<a href="/category?slug={{$slug}}">Races</a>{{else}}<button type="button" disabled>Races<small>À venir</small></button>{{end}}</li>
+                            <li>{{$slug := ""}}{{range $.Categories}}{{if eq .Name "Magie & cosmologie"}}{{$slug = .Slug}}{{end}}{{end}}{{if $slug}}<a href="/category?slug={{$slug}}">Magie &amp; cosmologie</a>{{else}}<button type="button" disabled>Magie &amp; cosmologie<small>À venir</small></button>{{end}}</li>
+                            <li>{{$slug := ""}}{{range $.Categories}}{{if eq .Name "Religions & mythes"}}{{$slug = .Slug}}{{end}}{{end}}{{if $slug}}<a href="/category?slug={{$slug}}">Religions &amp; mythes</a>{{else}}<button type="button" disabled>Religions &amp; mythes<small>À venir</small></button>{{end}}</li>
+                            <li>{{$slug := ""}}{{range $.Categories}}{{if eq .Name "Nature"}}{{$slug = .Slug}}{{end}}{{end}}{{if $slug}}<a href="/category?slug={{$slug}}">Nature</a>{{else}}<button type="button" disabled>Nature<small>À venir</small></button>{{end}}</li>
+                            <li>{{$slug := ""}}{{range $.Categories}}{{if eq .Name "Personnages"}}{{$slug = .Slug}}{{end}}{{end}}{{if $slug}}<a href="/category?slug={{$slug}}">Personnages</a>{{else}}<button type="button" disabled>Personnages<small>À venir</small></button>{{end}}</li>
+                            <li>{{$slug := ""}}{{range $.Categories}}{{if eq .Name "Technologies & artefacts"}}{{$slug = .Slug}}{{end}}{{end}}{{if $slug}}<a href="/category?slug={{$slug}}">Technologies &amp; artefacts</a>{{else}}<button type="button" disabled>Technologies &amp; artefacts<small>À venir</small></button>{{end}}</li>
+                            <li>{{$slug := ""}}{{range $.Categories}}{{if eq .Name "Exploration"}}{{$slug = .Slug}}{{end}}{{end}}{{if $slug}}<a href="/category?slug={{$slug}}">Exploration</a>{{else}}<button type="button" disabled>Exploration<small>À venir</small></button>{{end}}</li>
+                        </ul>
+                    </details></li>
+                    <li><details class="category-group" name="forum-categories">
+                        <summary>JDR</summary>
+                        <ul class="category-submenu">
+                            <li>{{$slug := ""}}{{range $.Categories}}{{if eq .Name "Règles du JDR"}}{{$slug = .Slug}}{{end}}{{end}}{{if $slug}}<a href="/category?slug={{$slug}}">Règles du JDR</a>{{else}}<button type="button" disabled>Règles du JDR<small>À venir</small></button>{{end}}</li>
+                            <li>{{$slug := ""}}{{range $.Categories}}{{if eq .Name "Création de personnage"}}{{$slug = .Slug}}{{end}}{{end}}{{if $slug}}<a href="/category?slug={{$slug}}">Création de personnage</a>{{else}}<button type="button" disabled>Création de personnage<small>À venir</small></button>{{end}}</li>
+                            <li>{{$slug := ""}}{{range $.Categories}}{{if eq .Name "Fiches de personnages"}}{{$slug = .Slug}}{{end}}{{end}}{{if $slug}}<a href="/category?slug={{$slug}}">Fiches de personnages</a>{{else}}<button type="button" disabled>Fiches de personnages<small>À venir</small></button>{{end}}</li>
+                            <li>{{$slug := ""}}{{range $.Categories}}{{if eq .Name "Parties & campagnes"}}{{$slug = .Slug}}{{end}}{{end}}{{if $slug}}<a href="/category?slug={{$slug}}">Parties &amp; campagnes</a>{{else}}<button type="button" disabled>Parties &amp; campagnes<small>À venir</small></button>{{end}}</li>
+                            <li>{{$slug := ""}}{{range $.Categories}}{{if eq .Name "Comptes rendus de parties"}}{{$slug = .Slug}}{{end}}{{end}}{{if $slug}}<a href="/category?slug={{$slug}}">Comptes rendus de parties</a>{{else}}<button type="button" disabled>Comptes rendus de parties<small>À venir</small></button>{{end}}</li>
+                        </ul>
+                    </details></li>
+                    <li><details class="category-group" name="forum-categories">
+                        <summary>CRÉATIONS</summary>
+                        <ul class="category-submenu">
+                            <li>{{$slug := ""}}{{range $.Categories}}{{if eq .Name "Illustrations"}}{{$slug = .Slug}}{{end}}{{end}}{{if $slug}}<a href="/category?slug={{$slug}}">Illustrations</a>{{else}}<button type="button" disabled>Illustrations<small>À venir</small></button>{{end}}</li>
+                            <li>{{$slug := ""}}{{range $.Categories}}{{if eq .Name "Cartes & cartographie"}}{{$slug = .Slug}}{{end}}{{end}}{{if $slug}}<a href="/category?slug={{$slug}}">Cartes &amp; cartographie</a>{{else}}<button type="button" disabled>Cartes &amp; cartographie<small>À venir</small></button>{{end}}</li>
+                            <li>{{$slug := ""}}{{range $.Categories}}{{if eq .Name "Fan arts"}}{{$slug = .Slug}}{{end}}{{end}}{{if $slug}}<a href="/category?slug={{$slug}}">Fan arts</a>{{else}}<button type="button" disabled>Fan arts<small>À venir</small></button>{{end}}</li>
+                            <li>{{$slug := ""}}{{range $.Categories}}{{if eq .Name "Textes et nouvelles"}}{{$slug = .Slug}}{{end}}{{end}}{{if $slug}}<a href="/category?slug={{$slug}}">Textes et nouvelles</a>{{else}}<button type="button" disabled>Textes et nouvelles<small>À venir</small></button>{{end}}</li>
+                        </ul>
+                    </details></li>
                 </ul>
             </nav>
         </section>
@@ -92,6 +134,7 @@
 </dialog>
 {{end}}
 <script src="/static/js/navigation.js" defer></script>
+<script src="/static/js/category-menu.js" defer></script>
 <script src="/static/js/character-count.js" defer></script>
 <script src="/static/js/account-menu.js" defer></script>
 </body>
