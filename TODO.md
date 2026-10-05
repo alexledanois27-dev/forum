@@ -1,5 +1,5 @@
 1. ajouter les categories et sous categories
-2. ajouter l'affichage et le conteur des commentaires
+2. ajouter l'affichage et le conteur des commentaires / DONE
 3. ajouter les TAG (A developper, A valider, valider, Idee)
 4. ajout du TAG CANON a la version modo
 5. Modifier le GMT de la date

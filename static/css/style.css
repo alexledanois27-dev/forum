@@ -77,9 +77,9 @@ h1 { font-family: var(--gothic); color: var(--gold); font-size: 46px; font-weigh
 .post-read-more { grid-column: 1; grid-row: 1; justify-self: start; min-height: 44px; margin: 0; padding: 8px 0; border: 0; background: transparent; color: var(--gold); font: inherit; cursor: pointer; }
 .post-read-more:hover { text-decoration: underline; text-underline-offset: 4px; }
 .post-read-more[hidden] { display: none; }
-.post-actions { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) max-content 44px; column-gap: 12px; align-items: start; }
+.post-actions { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) max-content max-content; column-gap: 12px; align-items: start; }
 .reaction-form { grid-column: 2; grid-row: 1; display: flex; gap: 4px; }
-.reaction-form button, .comment-box summary { display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; padding: 10px; background: transparent; border: 1px solid transparent; border-radius: 5px; color: var(--muted); }
+.reaction-form button, .comment-box summary, .comment-link { display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; padding: 10px; background: transparent; border: 1px solid transparent; border-radius: 5px; color: var(--muted); }
 .reaction-form button:hover, .comment-box summary:hover, .comment-box[open] summary { color: var(--gold); background: var(--raised); border-color: var(--line); }
 .reaction-form button span { color: var(--gold); }
 .comment-box { grid-column: 1 / -1; min-width: 0; }
@@ -231,7 +231,7 @@ button:disabled { color: var(--disabled); cursor: not-allowed; }
 /* Los contadores reservan el ancho que necesitan, incluso con varias cifras. */
 .reaction-form button { width: auto; min-width: 44px; gap: 6px; }
 .reaction-form img { flex-shrink: 0; }
-.reaction-count { font-size: 12px; font-variant-numeric: tabular-nums; }
+.reaction-count { color: var(--gold); font: 400 12px/1 var(--body-font); font-variant-numeric: tabular-nums; }
 .header-greeting { color: var(--muted); font-size: 14px; overflow-wrap: anywhere; }
 .header-greeting strong { color: var(--gold); }
 .header-auth form { margin: 0; }
@@ -273,7 +273,7 @@ body.menu-open { overflow: hidden; }
 .discussion-reply textarea { font-size: 16px; }
 .discussion-reply .comment-submit { justify-content: flex-end; }
 .discussion-signin p, .discussion-empty { color: var(--muted); font-size: 14px; }
-.discussion-comment { padding: 24px 0; border-bottom: 1px solid var(--line); }
+.discussion-comment { margin: 16px 0; padding: 24px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); }
 .discussion-comment .post-content { margin-top: 14px; }
 @media (max-width: 640px) {
     .discussion-page { padding: 20px 16px; }
@@ -303,3 +303,16 @@ body.menu-open { overflow: hidden; }
 .category-filter-list a { color: var(--gold); }
 .category-filter-list a:hover { background: var(--raised); }
 .category-filter-list small { font-size: 9px; color: var(--muted); margin-left: auto; }
+
+.discussion-post { padding: 24px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); }
+.comment-link { grid-column: 3; grid-row: 1; width: auto; min-width: 44px; gap: 6px; color: var(--gold); }
+.comment-link:hover { background: var(--raised); border-color: var(--line); }
+.comment-link img { flex-shrink: 0; }
+.discussion-composer { margin: 24px 0; padding: 16px 20px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); scroll-margin-top: 24px; }
+.discussion-composer > summary { padding: 8px 0; color: var(--gold); cursor: pointer; }
+.discussion-composer .discussion-reply { margin: 12px 0 0; padding: 0; border: 0; }
+#comments, .discussion-signin { scroll-margin-top: 24px; }
+.discussion-empty { padding: 20px; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; }
+@media (max-width: 640px) {
+    .discussion-post, .discussion-comment { padding: 18px; }
+}
