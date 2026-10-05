@@ -1,13 +1,14 @@
 package handlers
 
 import (
-	"html/template"
-	"net/http"
-	"strconv"
-
 	"forum/internal/database"
 	"forum/internal/middleware"
 	"forum/internal/models"
+	"html/template"
+	"net/http"
+	"strconv"
+	"strings"
+	"unicode/utf8"
 )
 
 func (h *Handler) PostHandler(w http.ResponseWriter, r *http.Request) {
@@ -61,8 +62,18 @@ func (h *Handler) PostHandler(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		title := r.FormValue("title")
-		content := r.FormValue("content")
+		title := strings.TrimSpace(r.FormValue("title"))
+		content := strings.TrimSpace(r.FormValue("content"))
+
+		if title == "" || utf8.RuneCountInString(title) > 150 {
+			http.Error(w, "Le titre doit contenir entre 1 et 150 caractères.", http.StatusBadRequest)
+			return
+		}
+
+		if content == "" || utf8.RuneCountInString(content) > 10000 {
+			http.Error(w, "Le post doit contenir entre 1 et 10 000 caractères.", http.StatusBadRequest)
+			return
+		}
 
 		post := models.Post{
 			UserID:  session.UserID,
