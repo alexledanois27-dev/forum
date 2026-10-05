@@ -1,4 +1,4 @@
-1. ajouter les categories et sous categories
+1. ajouter les categories et sous categories / DONE
 2. ajouter l'affichage et le conteur des commentaires / DONE
 3. ajouter les TAG (A developper, A valider, valider, Idee)
 4. ajout du TAG CANON a la version modo
