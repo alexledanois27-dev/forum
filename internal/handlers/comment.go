@@ -1,8 +1,12 @@
 package handlers
 
 import (
+	"database/sql"
+	"errors"
 	"net/http"
 	"strconv"
+	"strings"
+	"unicode/utf8"
 
 	"forum/internal/database"
 	"forum/internal/middleware"
@@ -28,12 +32,24 @@ func (h *Handler) CommentHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	postID, err := strconv.ParseInt(r.FormValue("post_id"), 10, 64)
-	if err != nil {
+	if err != nil || postID <= 0 {
 		http.Error(w, "Invalid post ID", http.StatusBadRequest)
 		return
 	}
 
-	content := r.FormValue("content")
+	content := strings.TrimSpace(r.FormValue("content"))
+	if content == "" || utf8.RuneCountInString(content) > 800 {
+		http.Error(w, "Le commentaire doit contenir entre 1 et 800 caractères.", http.StatusBadRequest)
+		return
+	}
+	if _, err := database.GetPostByID(h.DB, int(postID)); err != nil {
+		if errors.Is(err, sql.ErrNoRows) {
+			http.NotFound(w, r)
+		} else {
+			serverError(w, err)
+		}
+		return
+	}
 
 	comment := models.Comment{
 		PostID:  postID,
@@ -47,5 +63,5 @@ func (h *Handler) CommentHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	http.Redirect(w, r, "/", http.StatusSeeOther)
+	redirectBack(w, r, "/post-detail?id="+strconv.FormatInt(postID, 10))
 }

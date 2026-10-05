@@ -1,6 +1,8 @@
 package handlers
 
 import (
+	"database/sql"
+	"errors"
 	"net/http"
 	"strconv"
 
@@ -32,14 +34,31 @@ func (h *Handler) LikeHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	postTarget := r.FormValue("post_id")
+	commentTarget := r.FormValue("comment_id")
+	if (postTarget == "") == (commentTarget == "") {
+		http.Error(w, "Choisis un post ou un commentaire.", http.StatusBadRequest)
+		return
+	}
+	fallback := "/"
 	// Réaction sur un post
 	if postID := r.FormValue("post_id"); postID != "" {
 		id, err := strconv.Atoi(postID)
-		if err != nil {
+		if err != nil || id <= 0 {
 			http.Error(w, "Invalid post ID", http.StatusBadRequest)
 			return
 		}
 
+		_, err = database.GetPostByID(h.DB, id)
+		if err != nil {
+			if errors.Is(err, sql.ErrNoRows) {
+				http.NotFound(w, r)
+			} else {
+				serverError(w, err)
+			}
+			return
+		}
+		fallback = "/post-detail?id=" + strconv.Itoa(id)
 		if err := database.SetPostReaction(h.DB, int(session.UserID), id, value); err != nil {
 			http.Error(w, "Unable to save reaction", http.StatusInternalServerError)
 			return
@@ -49,16 +68,26 @@ func (h *Handler) LikeHandler(w http.ResponseWriter, r *http.Request) {
 	// Réaction sur un commentaire
 	if commentID := r.FormValue("comment_id"); commentID != "" {
 		id, err := strconv.Atoi(commentID)
-		if err != nil {
+		if err != nil || id <= 0 {
 			http.Error(w, "Invalid comment ID", http.StatusBadRequest)
 			return
 		}
 
+		target, err := database.GetCommentByID(h.DB, id)
+		if err != nil {
+			if errors.Is(err, sql.ErrNoRows) {
+				http.NotFound(w, r)
+			} else {
+				serverError(w, err)
+			}
+			return
+		}
+		fallback = "/post-detail?id=" + strconv.FormatInt(target.PostID, 10)
 		if err := database.SetCommentReaction(h.DB, int(session.UserID), id, value); err != nil {
 			http.Error(w, "Unable to save reaction", http.StatusInternalServerError)
 			return
 		}
 	}
 
-	http.Redirect(w, r, "/", http.StatusSeeOther)
+	redirectBack(w, r, fallback)
 }
