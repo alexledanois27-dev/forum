@@ -12,6 +12,7 @@
     </div>
     {{template "post-form" .}}
 </section>
+<script src="/static/js/post-categories.js" defer></script>
 {{end}}
 
 {{define "post-form"}}
@@ -23,17 +24,184 @@
     </div>
     <fieldset class="editor-categories" aria-describedby="categories-help">
         <legend>Catégories <span>Facultatif</span></legend>
-        <p id="categories-help">Choisissez les thèmes qui correspondent à votre chronique.</p>
-        <div class="category-options">
-            {{range .Categories}}
-            <label class="category-option">
-                <input type="checkbox" name="categories" value="{{.ID}}">
-                <span>{{.Name}}</span>
-            </label>
-            {{else}}
-            <p class="categories-empty">Aucune catégorie disponible pour le moment. Vous pouvez tout de même publier votre chronique.</p>
-            {{end}}
+        <p id="categories-help">Ouvrez un thème, puis choisissez « Général » ou une ou plusieurs sous-catégories. Vous pouvez combiner plusieurs thèmes.</p>
+        <div class="post-category-groups">
+            {{$parentID := 0}}{{range .Categories}}{{if or (eq .Name "Forum / Communauté") (eq .Name "Forum") (eq .Name "Communauté")}}{{$parentID = .ID}}{{end}}{{end}}
+            <div class="post-category-group" data-category-group="forum">
+                <button type="button" class="category-group-button" id="category-button-forum" aria-expanded="true" aria-controls="category-panel-forum">Forum / Communauté<span class="category-selection-count" hidden></span></button>
+                <div class="post-category-panel" id="category-panel-forum" aria-labelledby="category-button-forum">
+                    {{if $parentID}}<input type="hidden" data-parent-category value="{{$parentID}}" disabled>{{end}}
+                    <div class="category-options">
+                        <label class="category-option">
+                            <input type="checkbox" name="categories" value="{{$parentID}}" data-general {{if not $parentID}}disabled{{end}}>
+                            <span>Général{{if not $parentID}} <small>À venir</small>{{end}}</span>
+                        </label>
+                        {{$categoryID := 0}}{{range $.Categories}}{{if eq .Name "Présentations"}}{{$categoryID = .ID}}{{end}}{{end}}
+                        <label class="category-option">
+                            <input type="checkbox" name="categories" value="{{$categoryID}}" data-subcategory {{if not $categoryID}}disabled{{end}}>
+                            <span>Présentations{{if not $categoryID}} <small>À venir</small>{{end}}</span>
+                        </label>
+                        {{$categoryID := 0}}{{range $.Categories}}{{if eq .Name "Discussion générale"}}{{$categoryID = .ID}}{{end}}{{end}}
+                        <label class="category-option">
+                            <input type="checkbox" name="categories" value="{{$categoryID}}" data-subcategory {{if not $categoryID}}disabled{{end}}>
+                            <span>Discussion générale{{if not $categoryID}} <small>À venir</small>{{end}}</span>
+                        </label>
+                        {{$categoryID := 0}}{{range $.Categories}}{{if eq .Name "Hors sujet"}}{{$categoryID = .ID}}{{end}}{{end}}
+                        <label class="category-option">
+                            <input type="checkbox" name="categories" value="{{$categoryID}}" data-subcategory {{if not $categoryID}}disabled{{end}}>
+                            <span>Hors sujet{{if not $categoryID}} <small>À venir</small>{{end}}</span>
+                        </label>
+                        {{$categoryID := 0}}{{range $.Categories}}{{if eq .Name "Discussions du lore"}}{{$categoryID = .ID}}{{end}}{{end}}
+                        <label class="category-option">
+                            <input type="checkbox" name="categories" value="{{$categoryID}}" data-subcategory {{if not $categoryID}}disabled{{end}}>
+                            <span>Discussions du lore{{if not $categoryID}} <small>À venir</small>{{end}}</span>
+                        </label>
+                        {{$categoryID := 0}}{{range $.Categories}}{{if eq .Name "Bugs et problèmes"}}{{$categoryID = .ID}}{{end}}{{end}}
+                        <label class="category-option">
+                            <input type="checkbox" name="categories" value="{{$categoryID}}" data-subcategory {{if not $categoryID}}disabled{{end}}>
+                            <span>Bugs et problèmes{{if not $categoryID}} <small>À venir</small>{{end}}</span>
+                        </label>
+                        {{$categoryID := 0}}{{range $.Categories}}{{if eq .Name "Suggestions pour le forum"}}{{$categoryID = .ID}}{{end}}{{end}}
+                        <label class="category-option">
+                            <input type="checkbox" name="categories" value="{{$categoryID}}" data-subcategory {{if not $categoryID}}disabled{{end}}>
+                            <span>Suggestions pour le forum{{if not $categoryID}} <small>À venir</small>{{end}}</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            {{$parentID := 0}}{{range .Categories}}{{if eq .Name "Lore"}}{{$parentID = .ID}}{{end}}{{end}}
+            <div class="post-category-group" data-category-group="lore">
+                <button type="button" class="category-group-button" id="category-button-lore" aria-expanded="true" aria-controls="category-panel-lore">Lore<span class="category-selection-count" hidden></span></button>
+                <div class="post-category-panel" id="category-panel-lore" aria-labelledby="category-button-lore">
+                    {{if $parentID}}<input type="hidden" data-parent-category value="{{$parentID}}" disabled>{{end}}
+                    <div class="category-options">
+                        <label class="category-option">
+                            <input type="checkbox" name="categories" value="{{$parentID}}" data-general {{if not $parentID}}disabled{{end}}>
+                            <span>Général{{if not $parentID}} <small>À venir</small>{{end}}</span>
+                        </label>
+                        {{$categoryID := 0}}{{range $.Categories}}{{if eq .Name "Géographie"}}{{$categoryID = .ID}}{{end}}{{end}}
+                        <label class="category-option">
+                            <input type="checkbox" name="categories" value="{{$categoryID}}" data-subcategory {{if not $categoryID}}disabled{{end}}>
+                            <span>Géographie{{if not $categoryID}} <small>À venir</small>{{end}}</span>
+                        </label>
+                        {{$categoryID := 0}}{{range $.Categories}}{{if eq .Name "Histoire"}}{{$categoryID = .ID}}{{end}}{{end}}
+                        <label class="category-option">
+                            <input type="checkbox" name="categories" value="{{$categoryID}}" data-subcategory {{if not $categoryID}}disabled{{end}}>
+                            <span>Histoire{{if not $categoryID}} <small>À venir</small>{{end}}</span>
+                        </label>
+                        {{$categoryID := 0}}{{range $.Categories}}{{if eq .Name "Peuples & factions"}}{{$categoryID = .ID}}{{end}}{{end}}
+                        <label class="category-option">
+                            <input type="checkbox" name="categories" value="{{$categoryID}}" data-subcategory {{if not $categoryID}}disabled{{end}}>
+                            <span>Peuples &amp; factions{{if not $categoryID}} <small>À venir</small>{{end}}</span>
+                        </label>
+                        {{$categoryID := 0}}{{range $.Categories}}{{if eq .Name "Races"}}{{$categoryID = .ID}}{{end}}{{end}}
+                        <label class="category-option">
+                            <input type="checkbox" name="categories" value="{{$categoryID}}" data-subcategory {{if not $categoryID}}disabled{{end}}>
+                            <span>Races{{if not $categoryID}} <small>À venir</small>{{end}}</span>
+                        </label>
+                        {{$categoryID := 0}}{{range $.Categories}}{{if eq .Name "Magie & cosmologie"}}{{$categoryID = .ID}}{{end}}{{end}}
+                        <label class="category-option">
+                            <input type="checkbox" name="categories" value="{{$categoryID}}" data-subcategory {{if not $categoryID}}disabled{{end}}>
+                            <span>Magie &amp; cosmologie{{if not $categoryID}} <small>À venir</small>{{end}}</span>
+                        </label>
+                        {{$categoryID := 0}}{{range $.Categories}}{{if eq .Name "Religions & mythes"}}{{$categoryID = .ID}}{{end}}{{end}}
+                        <label class="category-option">
+                            <input type="checkbox" name="categories" value="{{$categoryID}}" data-subcategory {{if not $categoryID}}disabled{{end}}>
+                            <span>Religions &amp; mythes{{if not $categoryID}} <small>À venir</small>{{end}}</span>
+                        </label>
+                        {{$categoryID := 0}}{{range $.Categories}}{{if eq .Name "Nature"}}{{$categoryID = .ID}}{{end}}{{end}}
+                        <label class="category-option">
+                            <input type="checkbox" name="categories" value="{{$categoryID}}" data-subcategory {{if not $categoryID}}disabled{{end}}>
+                            <span>Nature{{if not $categoryID}} <small>À venir</small>{{end}}</span>
+                        </label>
+                        {{$categoryID := 0}}{{range $.Categories}}{{if eq .Name "Personnages"}}{{$categoryID = .ID}}{{end}}{{end}}
+                        <label class="category-option">
+                            <input type="checkbox" name="categories" value="{{$categoryID}}" data-subcategory {{if not $categoryID}}disabled{{end}}>
+                            <span>Personnages{{if not $categoryID}} <small>À venir</small>{{end}}</span>
+                        </label>
+                        {{$categoryID := 0}}{{range $.Categories}}{{if eq .Name "Technologies & artefacts"}}{{$categoryID = .ID}}{{end}}{{end}}
+                        <label class="category-option">
+                            <input type="checkbox" name="categories" value="{{$categoryID}}" data-subcategory {{if not $categoryID}}disabled{{end}}>
+                            <span>Technologies &amp; artefacts{{if not $categoryID}} <small>À venir</small>{{end}}</span>
+                        </label>
+                        {{$categoryID := 0}}{{range $.Categories}}{{if eq .Name "Exploration"}}{{$categoryID = .ID}}{{end}}{{end}}
+                        <label class="category-option">
+                            <input type="checkbox" name="categories" value="{{$categoryID}}" data-subcategory {{if not $categoryID}}disabled{{end}}>
+                            <span>Exploration{{if not $categoryID}} <small>À venir</small>{{end}}</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            {{$parentID := 0}}{{range .Categories}}{{if eq .Name "JDR"}}{{$parentID = .ID}}{{end}}{{end}}
+            <div class="post-category-group" data-category-group="jdr">
+                <button type="button" class="category-group-button" id="category-button-jdr" aria-expanded="true" aria-controls="category-panel-jdr">JDR<span class="category-selection-count" hidden></span></button>
+                <div class="post-category-panel" id="category-panel-jdr" aria-labelledby="category-button-jdr">
+                    {{if $parentID}}<input type="hidden" data-parent-category value="{{$parentID}}" disabled>{{end}}
+                    <div class="category-options">
+                        <label class="category-option">
+                            <input type="checkbox" name="categories" value="{{$parentID}}" data-general {{if not $parentID}}disabled{{end}}>
+                            <span>Général{{if not $parentID}} <small>À venir</small>{{end}}</span>
+                        </label>
+                        {{$categoryID := 0}}{{range $.Categories}}{{if eq .Name "Création de personnage"}}{{$categoryID = .ID}}{{end}}{{end}}
+                        <label class="category-option">
+                            <input type="checkbox" name="categories" value="{{$categoryID}}" data-subcategory {{if not $categoryID}}disabled{{end}}>
+                            <span>Création de personnage{{if not $categoryID}} <small>À venir</small>{{end}}</span>
+                        </label>
+                        {{$categoryID := 0}}{{range $.Categories}}{{if eq .Name "Fiches de personnages"}}{{$categoryID = .ID}}{{end}}{{end}}
+                        <label class="category-option">
+                            <input type="checkbox" name="categories" value="{{$categoryID}}" data-subcategory {{if not $categoryID}}disabled{{end}}>
+                            <span>Fiches de personnages{{if not $categoryID}} <small>À venir</small>{{end}}</span>
+                        </label>
+                        {{$categoryID := 0}}{{range $.Categories}}{{if eq .Name "Parties & campagnes"}}{{$categoryID = .ID}}{{end}}{{end}}
+                        <label class="category-option">
+                            <input type="checkbox" name="categories" value="{{$categoryID}}" data-subcategory {{if not $categoryID}}disabled{{end}}>
+                            <span>Parties &amp; campagnes{{if not $categoryID}} <small>À venir</small>{{end}}</span>
+                        </label>
+                        {{$categoryID := 0}}{{range $.Categories}}{{if eq .Name "Comptes rendus de parties"}}{{$categoryID = .ID}}{{end}}{{end}}
+                        <label class="category-option">
+                            <input type="checkbox" name="categories" value="{{$categoryID}}" data-subcategory {{if not $categoryID}}disabled{{end}}>
+                            <span>Comptes rendus de parties{{if not $categoryID}} <small>À venir</small>{{end}}</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            {{$parentID := 0}}{{range .Categories}}{{if eq .Name "Créations"}}{{$parentID = .ID}}{{end}}{{end}}
+            <div class="post-category-group" data-category-group="creations">
+                <button type="button" class="category-group-button" id="category-button-creations" aria-expanded="true" aria-controls="category-panel-creations">Créations<span class="category-selection-count" hidden></span></button>
+                <div class="post-category-panel" id="category-panel-creations" aria-labelledby="category-button-creations">
+                    {{if $parentID}}<input type="hidden" data-parent-category value="{{$parentID}}" disabled>{{end}}
+                    <div class="category-options">
+                        <label class="category-option">
+                            <input type="checkbox" name="categories" value="{{$parentID}}" data-general {{if not $parentID}}disabled{{end}}>
+                            <span>Général{{if not $parentID}} <small>À venir</small>{{end}}</span>
+                        </label>
+                        {{$categoryID := 0}}{{range $.Categories}}{{if eq .Name "Illustrations"}}{{$categoryID = .ID}}{{end}}{{end}}
+                        <label class="category-option">
+                            <input type="checkbox" name="categories" value="{{$categoryID}}" data-subcategory {{if not $categoryID}}disabled{{end}}>
+                            <span>Illustrations{{if not $categoryID}} <small>À venir</small>{{end}}</span>
+                        </label>
+                        {{$categoryID := 0}}{{range $.Categories}}{{if eq .Name "Cartes & cartographie"}}{{$categoryID = .ID}}{{end}}{{end}}
+                        <label class="category-option">
+                            <input type="checkbox" name="categories" value="{{$categoryID}}" data-subcategory {{if not $categoryID}}disabled{{end}}>
+                            <span>Cartes &amp; cartographie{{if not $categoryID}} <small>À venir</small>{{end}}</span>
+                        </label>
+                        {{$categoryID := 0}}{{range $.Categories}}{{if eq .Name "Fan arts"}}{{$categoryID = .ID}}{{end}}{{end}}
+                        <label class="category-option">
+                            <input type="checkbox" name="categories" value="{{$categoryID}}" data-subcategory {{if not $categoryID}}disabled{{end}}>
+                            <span>Fan arts{{if not $categoryID}} <small>À venir</small>{{end}}</span>
+                        </label>
+                        {{$categoryID := 0}}{{range $.Categories}}{{if eq .Name "Textes et nouvelles"}}{{$categoryID = .ID}}{{end}}{{end}}
+                        <label class="category-option">
+                            <input type="checkbox" name="categories" value="{{$categoryID}}" data-subcategory {{if not $categoryID}}disabled{{end}}>
+                            <span>Textes et nouvelles{{if not $categoryID}} <small>À venir</small>{{end}}</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
         </div>
+        <p class="category-selection-status" aria-live="polite" hidden></p>
+        <p class="category-availability-note">Les options « À venir » ne sont pas encore disponibles. Les tags seront proposés séparément.</p>
+        <noscript><p>Pour un même thème, choisissez « Général » ou ses sous-catégories.</p></noscript>
     </fieldset>
     <div class="editor-field">
         <label for="post-content">Votre chronique</label>

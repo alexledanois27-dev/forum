@@ -316,3 +316,50 @@ body.menu-open { overflow: hidden; }
 @media (max-width: 640px) {
     .discussion-post, .discussion-comment { padding: 18px; }
 }
+
+/* Grupos desplegables dentro del lateral: también caben en el menú móvil. */
+.category-group > summary { display: flex; align-items: center; justify-content: space-between; gap: 8px; min-height: 44px; padding: 10px; color: var(--gold); border-radius: 5px; font-size: 13px; font-weight: 600; letter-spacing: .04em; list-style: none; cursor: pointer; }
+.category-group > summary::-webkit-details-marker { display: none; }
+.category-group > summary::after { content: ""; width: 7px; height: 7px; flex-shrink: 0; margin: 0 3px 4px 8px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: rotate(45deg); }
+.category-group[open] > summary::after { transform: rotate(225deg); margin-bottom: 0; }
+.category-group > summary:hover, .category-group[open] > summary { background: var(--raised); }
+.category-submenu { list-style: none; margin: 6px 0 12px 10px; padding: 0 0 0 8px; border-left: 1px solid var(--line); }
+.category-submenu a, .category-submenu button { font-size: 12px; overflow-wrap: anywhere; }
+.category-submenu a { color: var(--text); }
+.category-submenu a:hover { color: var(--gold); }
+
+/* Botones compactos con un panel compartiendo el ancho de la fila. */
+.post-category-groups { display: flex; flex-wrap: wrap; gap: 8px; }
+.post-category-group { display: contents; }
+.category-group-button { display: inline-flex; align-items: center; gap: 6px; min-height: 36px; padding: 7px 11px; border: 1px solid var(--line); border-radius: 5px; background: var(--background); color: var(--gold); font: 12px/1.5 var(--body-font); cursor: pointer; }
+.category-group-button:hover, .category-group-button[aria-expanded="true"] { background: var(--raised); border-color: var(--gold); }
+.post-category-group.has-selection > .category-group-button { border-color: #8b7549; }
+.category-selection-count { color: var(--background); background: var(--gold); border-radius: 50%; min-width: 18px; padding: 0 4px; text-align: center; font-size: 10px; }
+.category-selection-count[hidden], .post-category-panel[hidden] { display: none; }
+.post-category-panel { order: 1; flex-basis: 100%; min-width: 0; padding: 12px; border: 1px solid var(--line); border-radius: 5px; background: var(--background); }
+.post-category-panel > p { color: var(--muted); font-size: 11px; margin: 0 0 10px; }
+.post-category-panel .category-options { gap: 6px; }
+.post-category-panel .category-option { min-height: 34px; padding: 5px 8px; gap: 6px; font-size: 11px; }
+.post-category-panel .category-option input { width: 14px; height: 14px; }
+.post-category-panel .category-option:has(input:disabled) { color: var(--disabled); cursor: not-allowed; border-color: var(--line); }
+.post-category-panel .category-option small { color: var(--muted); font-size: 9px; }
+.editor-categories .category-selection-status { color: var(--gold); font-size: 11px; }
+.editor-categories .category-availability-note { font-size: 10px; }
+@media (pointer: coarse) {
+    .category-group-button, .post-category-panel .category-option { min-height: 44px; }
+}
+.profile-settings { display: grid; gap: 18px; max-width: 760px; }
+.profile-notice { color: var(--muted); font-size: 12px; line-height: 1.7; }
+.profile-card { padding: clamp(18px, 4vw, 28px); border: 1px solid var(--line); border-radius: 8px; background: var(--surface); }
+.profile-card h2 { margin: 0 0 10px; color: var(--gold); font-size: 22px; }
+.profile-card > p { margin: 0 0 20px; color: var(--muted); font-size: 13px; line-height: 1.7; }
+.profile-card fieldset { display: grid; gap: 20px; min-width: 0; margin: 0; padding: 0; border: 0; }
+.profile-card fieldset .button { justify-self: start; }
+.profile-card fieldset:disabled input { color: var(--muted); cursor: not-allowed; }
+.profile-card fieldset:disabled .button { background: var(--raised); color: var(--muted); box-shadow: none; cursor: not-allowed; }
+.profile-future > p { margin-bottom: 0; }
+.profile-badge, .account-menu-pending small { display: inline-block; color: var(--muted); font: 10px/1.5 var(--body-font); border: 1px solid var(--line); border-radius: 4px; padding: 2px 6px; }
+.profile-badge { margin-left: 8px; vertical-align: middle; }
+.account-menu-pending small { margin-top: 4px; }
+.account-menu-pending:disabled:hover { background: transparent; color: var(--disabled); }
+.profile-card legend.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }

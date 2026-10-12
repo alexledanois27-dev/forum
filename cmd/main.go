@@ -29,6 +29,7 @@ func main() {
 	mux.HandleFunc("/category", h.CategoryHandler)
 	mux.HandleFunc("/post-detail", h.PostDetailHandler)
 	mux.HandleFunc("/my-posts", h.MyPostsHandler)
+	mux.HandleFunc("/profile", h.ProfileHandler)
 
 	fileServer := http.FileServer(http.Dir("./static"))
 	mux.Handle("/static/", http.StripPrefix("/static/", fileServer))
