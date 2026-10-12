@@ -1,0 +1,70 @@
+{{define "title"}}Mon profil — La Source du Monde{{end}}
+{{define "content"}}
+<header class="feed-heading">
+    <p class="eyebrow">Votre place dans les chroniques</p>
+    <h1>Mon profil</h1>
+    <p>Personnalisez votre identité et les accès à votre compte.</p>
+</header>
+{{if .User}}
+<div class="profile-settings">
+    {{if .ProfileError}}<p class="profile-notice" role="alert">{{.ProfileError}}</p>{{end}}
+    {{if .ProfileSuccess}}<p class="profile-notice" role="status">{{.ProfileSuccess}}</p>{{end}}
+    <section class="profile-card" aria-labelledby="profile-identity-title">
+        <h2 id="profile-identity-title">Nom d’utilisateur</h2>
+        <p>Le nom qui accompagne vos chroniques et vos commentaires.</p>
+        <form action="/profile" method="post" class="auth-form">
+            <fieldset>
+                <input type="hidden" name="csrf_token" value="{{.CSRFToken}}">
+                <legend class="sr-only">Modifier votre nom d’utilisateur</legend>
+                <input type="hidden" name="action" value="username">
+                <div class="auth-field">
+                    <label for="profile-username">Nom d’utilisateur</label>
+                    <input id="profile-username" name="username" value="{{.User.Username}}" autocomplete="username" minlength="3" maxlength="30" pattern="[A-Za-z0-9_\-]+" required aria-describedby="profile-username-help">
+                    <small id="profile-username-help">3 à 30 caractères : lettres sans accents, chiffres, tirets et tirets bas.</small>
+                </div>
+                <button class="button button-gold" type="submit">Enregistrer le nom</button>
+            </fieldset>
+        </form>
+    </section>
+    <section class="profile-card" aria-labelledby="profile-password-title">
+        <h2 id="profile-password-title">Mot de passe</h2>
+        <p>Choisissez un nouveau mot de passe pour votre compte.</p>
+        <form action="/profile" method="post" class="auth-form">
+            <fieldset>
+                <input type="hidden" name="csrf_token" value="{{.CSRFToken}}">
+                <legend class="sr-only">Modifier votre mot de passe</legend>
+                <input type="hidden" name="action" value="password">
+                <div class="auth-field">
+                    <label for="profile-current-password">Mot de passe actuel</label>
+                    <input id="profile-current-password" name="current_password" type="password" autocomplete="current-password" required>
+                </div>
+                <div class="auth-field">
+                    <label for="profile-new-password">Nouveau mot de passe</label>
+                    <input id="profile-new-password" name="new_password" type="password" autocomplete="new-password" minlength="8" required aria-describedby="profile-password-help">
+                    <small id="profile-password-help">Au moins 8 caractères.</small>
+                </div>
+                <div class="auth-field">
+                    <label for="profile-password-confirmation">Confirmer le nouveau mot de passe</label>
+                    <input id="profile-password-confirmation" name="password_confirmation" type="password" autocomplete="new-password" minlength="8" required>
+                </div>
+                <button class="button button-gold" type="submit">Modifier le mot de passe</button>
+            </fieldset>
+        </form>
+    </section>
+    <section class="profile-card profile-future" aria-labelledby="profile-avatar-title">
+        <h2 id="profile-avatar-title">Avatar <span class="profile-badge">À venir</span></h2>
+        <p>Choisissez un visage pour accompagner vos récits.</p>
+    </section>
+    <section class="profile-card profile-future" aria-labelledby="profile-badges-title">
+        <h2 id="profile-badges-title">Badges <span class="profile-badge">À venir</span></h2>
+        <p>Retrouvez et gérez les distinctions de votre profil.</p>
+    </section>
+</div>
+{{else}}
+<section class="empty-state">
+    <h2>Retrouvez votre profil</h2>
+    <p>Connectez-vous pour accéder à votre compte.</p>
+    <a class="button button-gold" href="/login">Se connecter</a>
+</section>
+{{end}}
+{{end}}

@@ -119,3 +119,31 @@ func DeleteUser(db *sql.DB, userID int) error {
 
 	return err
 }
+
+// UpdatePasswordAndSession remplace le mot de passe et toutes les sessions
+// dans une seule transaction. Le hash précédent protège des mises à jour concurrentes.
+func UpdatePasswordAndSession(db *sql.DB, userID int, oldHash, newHash string, session models.Session) error {
+	tx, err := db.Begin()
+	if err != nil {
+		return err
+	}
+	defer tx.Rollback()
+	result, err := tx.Exec("UPDATE users SET password_hash = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ? AND password_hash = ?", newHash, userID, oldHash)
+	if err != nil {
+		return err
+	}
+	count, err := result.RowsAffected()
+	if err != nil {
+		return err
+	}
+	if count != 1 {
+		return sql.ErrNoRows
+	}
+	if _, err := tx.Exec("DELETE FROM sessions WHERE user_id = ?", userID); err != nil {
+		return err
+	}
+	if _, err := tx.Exec("INSERT INTO sessions (id, user_id, expires_at) VALUES (?, ?, ?)", session.ID, userID, session.ExpiresAt); err != nil {
+		return err
+	}
+	return tx.Commit()
+}

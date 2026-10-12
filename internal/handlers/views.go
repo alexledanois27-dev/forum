@@ -30,14 +30,17 @@ type CommentView struct {
 }
 
 type PageData struct {
-	User       *models.User
-	Posts      []PostView
-	Post       PostView
-	Comments   []CommentView
-	Category   *models.Category
-	Categories []models.Category
-	ReturnTo   string
-	BackURL    string
+	CSRFToken      string
+	ProfileError   string
+	ProfileSuccess string
+	User           *models.User
+	Posts          []PostView
+	Post           PostView
+	Comments       []CommentView
+	Category       *models.Category
+	Categories     []models.Category
+	ReturnTo       string
+	BackURL        string
 }
 
 // Conserve les dates de la base ; convertit uniquement les copies affichées.

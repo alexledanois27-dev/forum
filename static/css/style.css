@@ -348,3 +348,18 @@ body.menu-open { overflow: hidden; }
 @media (pointer: coarse) {
     .category-group-button, .post-category-panel .category-option { min-height: 44px; }
 }
+.profile-settings { display: grid; gap: 18px; max-width: 760px; }
+.profile-notice { color: var(--muted); font-size: 12px; line-height: 1.7; }
+.profile-card { padding: clamp(18px, 4vw, 28px); border: 1px solid var(--line); border-radius: 8px; background: var(--surface); }
+.profile-card h2 { margin: 0 0 10px; color: var(--gold); font-size: 22px; }
+.profile-card > p { margin: 0 0 20px; color: var(--muted); font-size: 13px; line-height: 1.7; }
+.profile-card fieldset { display: grid; gap: 20px; min-width: 0; margin: 0; padding: 0; border: 0; }
+.profile-card fieldset .button { justify-self: start; }
+.profile-card fieldset:disabled input { color: var(--muted); cursor: not-allowed; }
+.profile-card fieldset:disabled .button { background: var(--raised); color: var(--muted); box-shadow: none; cursor: not-allowed; }
+.profile-future > p { margin-bottom: 0; }
+.profile-badge, .account-menu-pending small { display: inline-block; color: var(--muted); font: 10px/1.5 var(--body-font); border: 1px solid var(--line); border-radius: 4px; padding: 2px 6px; }
+.profile-badge { margin-left: 8px; vertical-align: middle; }
+.account-menu-pending small { margin-top: 4px; }
+.account-menu-pending:disabled:hover { background: transparent; color: var(--disabled); }
+.profile-card legend.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
