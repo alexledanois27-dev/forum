@@ -57,7 +57,7 @@ func GetValidSession(db *sql.DB, sessionID string, now time.Time) (*models.Sessi
 	err := db.QueryRow(`
 		SELECT id, user_id, expires_at, created_at
 		FROM sessions
-		WHERE id = ? AND expires_at > ?
+		WHERE id = ? AND julianday(expires_at) > julianday(?)
 	`, sessionID, now).Scan(
 		&session.ID,
 		&session.UserID,
@@ -95,7 +95,7 @@ func DeleteSessionsByUser(db *sql.DB, userID int) error {
 func DeleteExpiredSessions(db *sql.DB, now time.Time) error {
 	_, err := db.Exec(`
 		DELETE FROM sessions
-		WHERE expires_at <= ?
+		WHERE julianday(expires_at) <= julianday(?)
 	`, now)
 
 	return err

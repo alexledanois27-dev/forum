@@ -2,6 +2,7 @@ package database
 
 import (
 	"database/sql"
+	"fmt"
 
 	"forum/internal/models"
 )
@@ -132,4 +133,60 @@ func RemoveCategoryFromPost(db *sql.DB, postID, categoryID int) error {
 	`, postID, categoryID)
 
 	return err
+}
+
+// initCategories seeds the categories expected by the existing templates.
+// Existing names, slugs and IDs are preserved.
+func initCategories(tx *sql.Tx) error {
+	defaults := [][2]string{
+		{"Annonces", "annonces"},
+		{"Bugs et problèmes", "bugs-et-problemes"},
+		{"Cartes & cartographie", "cartes-cartographie"},
+		{"Changelog", "changelog"},
+		{"Comptes rendus de parties", "comptes-rendus-de-parties"},
+		{"Création de personnage", "creation-de-personnage"},
+		{"Créations", "creations"},
+		{"Discussion générale", "discussion-generale"},
+		{"Discussions du lore", "discussions-du-lore"},
+		{"Exploration", "exploration"},
+		{"Fan arts", "fan-arts"},
+		{"Fiches de personnages", "fiches-de-personnages"},
+		{"Forum / Communauté", "forum-communaute"},
+		{"Géographie", "geographie"},
+		{"Histoire", "histoire"},
+		{"Hors sujet", "hors-sujet"},
+		{"Illustrations", "illustrations"},
+		{"JDR", "jdr"},
+		{"Lore", "lore"},
+		{"Magie & cosmologie", "magie-cosmologie"},
+		{"Mises à jour du lore", "mises-a-jour-du-lore"},
+		{"Nature", "nature"},
+		{"Parties & campagnes", "parties-campagnes"},
+		{"Personnages", "personnages"},
+		{"Peuples & factions", "peuples-factions"},
+		{"Présentations", "presentations"},
+		{"Races", "races"},
+		{"Religions & mythes", "religions-mythes"},
+		{"Règlement", "reglement"},
+		{"Règles du JDR", "regles-du-jdr"},
+		{"Suggestions pour le forum", "suggestions-pour-le-forum"},
+		{"Technologies & artefacts", "technologies-artefacts"},
+		{"Textes et nouvelles", "textes-et-nouvelles"},
+	}
+	for _, category := range defaults {
+		// The forum parent has two legacy aliases accepted by the templates.
+		if category[0] == "Forum / Communauté" {
+			var count int
+			if err := tx.QueryRow(`SELECT COUNT(*) FROM categories WHERE name IN ('Forum', 'Communauté')`).Scan(&count); err != nil {
+				return err
+			}
+			if count > 0 {
+				continue
+			}
+		}
+		if _, err := tx.Exec(`INSERT INTO categories (name, slug) VALUES (?, ?) ON CONFLICT(name) DO NOTHING`, category[0], category[1]); err != nil {
+			return fmt.Errorf("category %q: %w", category[0], err)
+		}
+	}
+	return nil
 }

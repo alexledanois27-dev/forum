@@ -7,7 +7,7 @@ import (
 	"os"
 	"path/filepath"
 
-	_ "modernc.org/sqlite"
+	_ "github.com/mattn/go-sqlite3"
 )
 
 //go:embed schema.sql
@@ -24,10 +24,9 @@ func Open(dbPath string) (*sql.DB, error) {
 	dsn := "file:" + filepath.ToSlash(dbPath) +
 		"?_foreign_keys=on" +
 		"&_busy_timeout=5000" +
-		"&_journal_mode=WAL" +
-		"&_time_format=sqlite"
+		"&_journal_mode=WAL"
 
-	db, err := sql.Open("sqlite", dsn)
+	db, err := sql.Open("sqlite3", dsn)
 	if err != nil {
 		return nil, fmt.Errorf("open database: %w", err)
 	}
@@ -47,6 +46,12 @@ func Open(dbPath string) (*sql.DB, error) {
 		_ = tx.Rollback()
 		db.Close()
 		return nil, fmt.Errorf("initialize database schema: %w", err)
+	}
+
+	if err := initCategories(tx); err != nil {
+		_ = tx.Rollback()
+		db.Close()
+		return nil, fmt.Errorf("initialize categories: %w", err)
 	}
 
 	if err := tx.Commit(); err != nil {
