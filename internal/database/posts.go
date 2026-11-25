@@ -30,7 +30,7 @@ func CreatePost(db *sql.DB, post models.Post, categoryIDs []int) (int64, error) 
 	for _, categoryID := range categoryIDs {
 		if _, err := tx.Exec(`
 			INSERT INTO post_categories (post_id, category_id)
-			VALUES (?, ?)
+			VALUES (?, ?) ON CONFLICT(post_id, category_id) DO NOTHING
 		`, postID, categoryID); err != nil {
 			return 0, err
 		}

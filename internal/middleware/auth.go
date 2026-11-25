@@ -10,7 +10,7 @@ import (
 	"forum/internal/database"
 	"forum/internal/models"
 
-	"github.com/google/uuid"
+	"github.com/gofrs/uuid"
 )
 
 const (
@@ -23,7 +23,7 @@ func NewSession(userID int64) models.Session {
 	now := time.Now().UTC().Truncate(time.Second)
 
 	return models.Session{
-		ID:        uuid.NewString(),
+		ID:        uuid.Must(uuid.NewV4()).String(),
 		UserID:    userID,
 		ExpiresAt: now.Add(SessionDuration),
 		CreatedAt: now,
@@ -71,7 +71,7 @@ func GetSessionID(r *http.Request) (string, error) {
 		return "", errors.New("empty session cookie")
 	}
 
-	if _, err := uuid.Parse(cookie.Value); err != nil {
+	if _, err := uuid.FromString(cookie.Value); err != nil {
 		return "", errors.New("invalid session cookie")
 	}
 

@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS categories (
     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABlE IF NOT EXISTS posts (
+CREATE TABLE IF NOT EXISTS posts (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     user_id INTEGER NOT NULL,
     title TEXT NOT NULL
@@ -42,7 +42,7 @@ CREATE TABlE IF NOT EXISTS posts (
 
 CREATE TABLE IF NOT EXISTS post_categories (
     post_id INTEGER NOT NULL,
-    category_id INTEGER nOT NULL,
+    category_id INTEGER NOT NULL,
 
     PRIMARY KEY (post_id, category_id),
 
@@ -107,8 +107,18 @@ CREATE TABLE IF NOT EXISTS comment_reactions (
         ON DELETE CASCADE
 );
 
-CREATE INDEX IF NOT EXISTS idx_sessions_user_id
-    ON sessions(user_id);
+-- Existing databases may contain duplicate sessions. Keep the latest created
+-- session (rowid breaks ties), then enforce one session per user.
+DELETE FROM sessions WHERE rowid NOT IN (
+    SELECT rowid FROM sessions AS s
+    WHERE s.rowid = (
+        SELECT newer.rowid FROM sessions AS newer
+        WHERE newer.user_id = s.user_id
+        ORDER BY julianday(newer.created_at) DESC, newer.rowid DESC LIMIT 1
+    )
+);
+CREATE UNIQUE INDEX IF NOT EXISTS idx_sessions_unique_user_id ON sessions(user_id);
+DROP INDEX IF EXISTS idx_sessions_user_id;
 
 CREATE INDEX IF NOT EXISTS idx_sessions_expires_at
     ON sessions(expires_at);
